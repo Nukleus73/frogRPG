@@ -1,1 +1,1 @@
-// FJERNES
+// husk å lag i canvas
