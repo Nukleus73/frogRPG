@@ -1,1 +1,1 @@
-// husk å lag i canvas
+// husk å lag i canvas!
