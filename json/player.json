@@ -1,0 +1,14 @@
+{
+    "startLevel": 1,
+    "startExperience": 0,
+    "health": 100,
+    "mana": 50,
+    "strength": 10,
+    "speed": 8,
+    "defense": 5,
+    "location": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0
+    }
+  }  
