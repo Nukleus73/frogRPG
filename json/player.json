@@ -5,9 +5,5 @@
     "mana": 50,
     "strength": 10,
     "speed": 8,
-    "defense": 5,
-    "location": {
-      "x": 0.0,
-      "y": 0.0
-    }
+    "defense": 5
   }  
