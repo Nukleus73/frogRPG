@@ -57,24 +57,21 @@ class Player {
   // behaviour of object
   gameLoop() {
     // check if specific keys are pressed and update velocity accordingly
-    if (this.keys[this.keyConfig.up] && !playerTouchingWalls(document.getElementById(this.playerWrapper.id), "top")) {
+    if (this.keys[this.keyConfig.up] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       this.velocityY -= this.moveSpeed;
       this.playerColideDirection = "up"
     }
-    if (this.keys[this.keyConfig.left] && !playerTouchingWalls(document.getElementById(this.playerWrapper.id), "left")) {
+    if (this.keys[this.keyConfig.left]) {
       this.velocityX -= this.moveSpeed;
       this.playerColideDirection = "left"
     }
-    if (this.keys[this.keyConfig.down] && !playerTouchingWalls(document.getElementById(this.playerWrapper.id), "bottom")) {
+    if (this.keys[this.keyConfig.down]) {
       this.velocityY += this.moveSpeed;
       this.playerColideDirection = "down"
     }
-    if (this.keys[this.keyConfig.right] && !playerTouchingWalls(document.getElementById(this.playerWrapper.id), "right")) {
+    if (this.keys[this.keyConfig.right]) {
       this.velocityX += this.moveSpeed;
       this.playerColideDirection = "right"
-    }
-    else {
-
     }
 
     // apply friction to slow down the player over time

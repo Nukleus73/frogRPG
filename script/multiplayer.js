@@ -1,21 +1,16 @@
-function createsession() {
     // Creates peer object
     var peer = new Peer();
 
     // Peer object assigned to random, unique ID when made. 
     peer.on('open', function(id) {
-        console.log('My peer id is: ' + id);
+        console.log('[Multiplayer.js] Your PeerID: ' + id);
     })
-    return id;
-}
 
-function connection() {
     // Start connection
     var conn = peer.connect('dest-peer-id');
 
     // Receive connection
     peer.on('connection', function(conn){})
-}
 
 function data() {
     conn.on('open', function() {
