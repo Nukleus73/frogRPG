@@ -5,16 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <script src="script/multiplayer.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/index.css"/>
     <title>Document</title>
 
+    <style>
+ 
+    </style>
+
 </head>
 <body>
-    <section class="sectionMainMenu">
+    <section class="sectionStartMenu">
         <div class="bannerBackground">
+            <!-- overlay to fade screen -->
+            <div class="darkenOverlay"></div>
             <!-- Button -->
-            <button class="menuButton" onclick="">Start Adventure</button>
+            <button class="menuButton">Start Adventure</button>
         </div>
     </section>
+
+
+        
+        <script>
+$(document).ready(function() {
+    $(".menuButton").click(function() {
+        // Toggle the 'animated' class to start the animation
+        $(".bannerBackground").toggleClass("animated");
+    });
+});
+
+        </script>
 </body>
 </html>

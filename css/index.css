@@ -1,67 +1,95 @@
 
-*,
-*::before,
-*::after {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  *,
+  *::before,
+  *::after {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
 
+  }
+
+  .sectionStartMenu    {
+      height: 100vh;
+      width: 100vw;
+      border: none;
+  }
+/* Rest of your CSS */
+
+/* Define the keyframes for the zoom animation */
+
+/* Apply the animation to the .bannerBackground */
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0); /* Start with transparent background */
+  }
+  100% {
+    transform: scale(2.5); /* Adjust the scale value to control the zoom level */
+    background-color: rgba(0, 0, 0, 1); /* End with black background */
+  }
 }
 
-.sectionMainMenu    {
-    height: 100vh;
-    width: 100vw;
-    border: none;
-}
 .bannerBackground {
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    background-image: url("../assets/start_Screen_Background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-image: url("../assets/start_Screen_Background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
-.menuButton {
-    font-size: 34px; 
-    padding: 10px 30px;
-    border-radius: 25px; 
-    border: none; 
-    background: rgba(135, 206, 235, 0.3); 
-    color: white; 
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
-    transition: all 0.3s ease;  
-    margin-bottom: 400px;
-    width: 20vw;
-    height: 6vh;
-  }
-
-  .menuButton:hover {
-    background: rgba(135, 206, 235, 0.5); 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
-}
-
-  .menuButton:active {
-    background: rgba(135, 206, 235, 0.7); 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-    transform: translateY(2px); 
-  }
-
-  @media screen and (min-width: 601px) {
-    .menuButton {
-      font-size: 34px;
-    }
-  }
+.bannerBackground.animated {
+  /* Apply the animation */
   
-  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
-  @media screen and (max-width: 600px) {
-    .menuButton {
-      font-size: 12px;
+  animation-name: slowZoom;
+  animation-duration: 1s; /* Adjust as needed */
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1; /* Change to 1 to avoid infinite looping unless desired */
+  /* screen becomes darker and then black as the zoom is going in*/
+}
+
+  .menuButton {
+      font-size: 34px; 
+      padding: 10px 30px;
+      border-radius: 25px; 
+      border: none; 
+      background: rgba(135, 206, 235, 0.3); 
+      color: white; 
+      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
+      transition: all 0.3s ease;  
+      margin-bottom: 400px;
+      width: 20vw;
+      height: 6vh;
     }
+
+    .menuButton:hover {
+      background: rgba(135, 206, 235, 0.5); 
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
   }
+
+    .menuButton:active {
+      background: rgba(135, 206, 235, 0.7); 
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+      transform: translateY(2px); 
+    }
+
+    @media screen and (min-width: 601px) {
+      .menuButton {
+        font-size: 34px;
+      }
+    }
+    
+
+    @media screen and (max-width: 600px) {
+      .menuButton {
+        font-size: 12px;
+      }
+    }
