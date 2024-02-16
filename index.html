@@ -8,32 +8,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/index.css"/>
     <title>Document</title>
-
     <style>
- 
+        /* FOR TESTING */
+        .playerWrapper {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+        }
+
+        .playerBody {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-color: blue;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
     </style>
 
 </head>
-<body>
+<body>    
     <section class="sectionStartMenu">
-        <div class="bannerBackground">
-            <!-- overlay to fade screen -->
-            <div class="darkenOverlay"></div>
-            <!-- Button -->
-            <button class="menuButton">Start Adventure</button>
-        </div>
-    </section>
+    <div class="bannerBackground">
+        <!-- overlay to fade screen -->
+        <div class="darkenOverlay"></div>
+        <!-- Button -->
+        <button class="menuButton">Start Adventure</button>
+    </div>
+</section>
 
 
         
-        <script>
-$(document).ready(function() {
-    $(".menuButton").click(function() {
-        // Toggle the 'animated' class to start the animation
-        $(".bannerBackground").toggleClass("animated");
+<script>
+    $(document).ready(function() {
+        $(".menuButton").click(function() {
+            // Toggle the 'animated' class to start the animation
+            $(".bannerBackground").toggleClass("animated");
+        });
     });
-});
-
-        </script>
+    
+            </script>
 </body>
 </html>
