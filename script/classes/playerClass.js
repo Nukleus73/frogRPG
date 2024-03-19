@@ -2,7 +2,7 @@ let playerCounter = 0;
 
 // player class definition
 class Player {
-  constructor(color, keyConfig, weapon) {
+  constructor(type, keyConfig, weapon) {
    
     //  acceleration, friction and movement
     this.acceleration = 0.35;
@@ -30,8 +30,8 @@ class Player {
     this.playerWrapper.setAttribute('id', 'player' + playerCounter)
 
     // create the player body
-    this.playerBody = document.createElement('img');
-    this.playerBody.src = `/media/Characters/${color}_character.png`;
+    this.playerBody = document.createElement('svg');
+    this.playerBody.src = `/assets/frog_sprites/frog_${type}.svg`;
     this.playerBody.classList.add('playerBody');
 
     // append elements to the document
