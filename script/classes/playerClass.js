@@ -7,7 +7,7 @@ class Player {
     //  acceleration, friction and movement
     this.acceleration = 0.35;
     this.friction = 0.85;
-    this.moveSpeed = 0.7;
+    this.moveSpeed = 0.9;
 
     // initial position
     this.positionX = 0;
@@ -61,15 +61,15 @@ class Player {
       this.velocityY -= this.moveSpeed;
       this.playerColideDirection = "up"
     }
-    if (this.keys[this.keyConfig.left]) {
+    if (this.keys[this.keyConfig.left] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       this.velocityX -= this.moveSpeed;
       this.playerColideDirection = "left"
     }
-    if (this.keys[this.keyConfig.down]) {
+    if (this.keys[this.keyConfig.down] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       this.velocityY += this.moveSpeed;
       this.playerColideDirection = "down"
     }
-    if (this.keys[this.keyConfig.right]) {
+    if (this.keys[this.keyConfig.right] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       this.velocityX += this.moveSpeed;
       this.playerColideDirection = "right"
     }
@@ -81,9 +81,6 @@ class Player {
     // update player's position based on velocity and acceleration
     this.positionX += this.velocityX * this.acceleration;
     this.positionY += this.velocityY * this.acceleration;
-
-    // calculate rotation based on velocity
-      this.rotation = Math.atan2(this.velocityY, this.velocityX);
 
     // update the HTML playerBody's transform property to move the player on the screen
     this.playerWrapper.style.transform = `translate(${this.positionX}px, ${this.positionY}px) rotate(${this.rotation}rad)`;

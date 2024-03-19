@@ -22,13 +22,24 @@
             height: 100%;
             background-color: blue;
             border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            border-top-left-radius: 20px;
         }
     </style>
-
 </head>
-<body>    
-    <section class="section1">
+<body>
+    <div class="wall" style="width: 100px; height: 150px; background-color: red;"></div>
+    <script src="./script/wallCollide.js"></script>
+    <script src="./script/classes/playerClass.js"></script>
+    <script>
+        //  players
+            let player1 = new Player('green', {
+                up: 'w',
+                left: 'a',
+                down: 's',
+                right: 'd'
+            });
+    </script>  
+    <!-- <section class="section1">
     <div class="bannerBackground">
         <div class="darkenOverlay"></div>
         <button class="menuButton">Start Adventure</button>
@@ -148,7 +159,7 @@ function nextPage() {
 
 
 
-
+ -->
 
 </body>
 </html>
