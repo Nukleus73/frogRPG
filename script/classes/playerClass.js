@@ -20,6 +20,8 @@ class Player {
     //  rotation
     this.rotation = 0;
 
+    // LEGG TILL AT FROSKEN HOPPER FRA SIDE TIL SIDE
+
     //  keys
     this.keys = {};
     this.keyConfig = keyConfig;
