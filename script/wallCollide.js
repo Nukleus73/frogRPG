@@ -1,5 +1,5 @@
 function wallCollide(player) {
-    let walls = document.getElementsByClassName("wall");
+    let walls = document.getElementsByClassName("coliderWalls");
 
     for (let i = 0; i < walls.length; i++) {
         let wall = walls[i].getBoundingClientRect();

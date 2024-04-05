@@ -24,12 +24,39 @@
             border-top-right-radius: 20px;
             border-top-left-radius: 20px;
         }
+
+        /*walls testing*/
+        .coliderWalls, .green {
+            width: 64px;
+            height: 64px;
+            margin: 0;
+            padding: 0;
+            
+        }
+
+        .coliderWalls {
+            background: brown;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .mapTable {
+            position: absolute;
+            width: 3392;
+            height: auto;
+        }
+
+        /**/
+
     </style>
 </head>
 <body>
-    <div class="wall" style="width: 100px; height: 150px; background-color: red;"></div>
+   <!--  <div class="wall" style="width: 100px; height: 150px; background-color: red;"></div> -->
     <script src="./script/wallCollide.js"></script>
     <script src="./script/classes/playerClass.js"></script>
+    <script src="script/walls.js"></script>
     <script>
         //  players
             let player1 = new Player('cleric', {
@@ -160,6 +187,6 @@ function nextPage() {
 
 
  -->
-
+ <div id="mapImg"><img src="" alt=""></div>
 </body>
 </html>
