@@ -2,12 +2,51 @@ let playerCounter = 0;
 
 // player class definition
 class Player {
-  constructor(type, keyConfig, weapon) {
-   
+  constructor(frog_class, username, peerId) {
+
+    let playerStats;
+
+    switch (frog_class) {
+      case 'archer':
+        playerStats = {
+          health: 60,
+          mana: 70,
+          strength: 80,
+          speed: 100,
+        };
+        break;
+      case 'cleric':
+        playerStats = {
+          health: 100,
+          mana: 100,
+          strength: 40,
+          speed: 100,
+        };
+        break;
+      case 'mage':
+        playerStats = {
+          health: 40,
+          mana: 70,
+          strength: 100,
+          speed: 60,
+        };
+        break;
+      case 'warrior':
+        playerStats = {
+          health: 100,
+          mana: 60,
+          strength: 80,
+          speed: 50,
+        };
+        break;
+      default:
+        throw new Error(`[playerClass.js]: Class (${frog_class}) not found.`);
+    }
+
     //  acceleration, friction and movement
     this.acceleration = 0.35;
-    this.friction = 0.85;
-    this.moveSpeed = 0.9;
+    this.friction = 0.8;
+    this.moveSpeed = (playerStats.speed * 10);
 
     // initial position
     this.positionX = 0;
@@ -17,27 +56,48 @@ class Player {
     this.velocityX = 0;
     this.velocityY = 0;
 
-    //  rotation
-    this.rotation = 0;
-
-    // LEGG TILL AT FROSKEN HOPPER FRA SIDE TIL SIDE
-
     //  keys
     this.keys = {};
-    this.keyConfig = keyConfig;
+    this.keyConfig = {
+      up: 'w',
+      left: 'a',
+      down: 's',
+      right: 'd'
+    };
 
     //  create the wrapper for the whole player
     this.playerWrapper = document.createElement('div');
     this.playerWrapper.classList.add('playerWrapper');
     this.playerWrapper.setAttribute('id', 'player' + playerCounter)
 
+
+
     // create the player body
-    this.playerBody = document.createElement('svg');
-    this.playerBody.src = `/assets/frog_sprites/frog_${type}.svg`;
+    this.playerBody = document.createElement('img');
+    this.playerBody.src = `./assets/frog_sprites/frog_${frog_class}.svg`;
     this.playerBody.classList.add('playerBody');
+
+    // create the player weapon
+    this.playerWeapon = document.createElement('img');
+    this.playerWeapon.src = `./assets/frog_gear/${frog_class}.svg`;
+    this.playerWeapon.style.position = 'absolute';
+    this.playerWeapon.classList.add('playerWeapon');
+
+    // class definitions
+
+    switch (frog_class) {
+      case 'archer':
+        this.playerWeapon.style.width = '2.5rem'
+        this.playerWeapon.style.transform = 'rotate(90deg)'
+        this.playerWeapon.style.top = '-10px'
+        this.playerWeapon.style.left = '15px'
+        break;
+
+    }
 
     // append elements to the document
     this.playerWrapper.appendChild(this.playerBody);
+    this.playerWrapper.appendChild(this.playerWeapon);
     document.body.appendChild(this.playerWrapper);
 
     // updates keys object when a key is pressed
@@ -58,36 +118,58 @@ class Player {
 
   // behaviour of object
   gameLoop() {
-    // check if specific keys are pressed and update velocity accordingly
+    // Check if specific keys are pressed and update acceleration accordingly
+    let accelerationX = 0;
+    let accelerationY = 0;
+
     if (this.keys[this.keyConfig.up] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
-      this.velocityY -= this.moveSpeed;
-      this.playerColideDirection = "up"
+      accelerationY -= this.acceleration;
+      this.playerColideDirection = "up";
     }
     if (this.keys[this.keyConfig.left] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
-      this.velocityX -= this.moveSpeed;
-      this.playerColideDirection = "left"
+      accelerationX -= this.acceleration;
+      this.playerColideDirection = "left";
     }
     if (this.keys[this.keyConfig.down] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
-      this.velocityY += this.moveSpeed;
-      this.playerColideDirection = "down"
+      accelerationY += this.acceleration;
+      this.playerColideDirection = "down";
     }
     if (this.keys[this.keyConfig.right] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
-      this.velocityX += this.moveSpeed;
-      this.playerColideDirection = "right"
+      accelerationX += this.acceleration;
+      this.playerColideDirection = "right";
     }
 
-    // apply friction to slow down the player over time
+    // Apply friction to slow down the player's velocity
     this.velocityX *= this.friction;
     this.velocityY *= this.friction;
 
-    // update player's position based on velocity and acceleration
-    this.positionX += this.velocityX * this.acceleration;
-    this.positionY += this.velocityY * this.acceleration;
+    // Update player's velocity based on acceleration
+    this.velocityX += accelerationX;
+    this.velocityY += accelerationY;
 
-    // update the HTML playerBody's transform property to move the player on the screen
-    this.playerWrapper.style.transform = `translate(${this.positionX}px, ${this.positionY}px) rotate(${this.rotation}rad)`;
+    // Update player's position based on velocity
+    this.positionX += this.velocityX;
+    this.positionY += this.velocityY;
 
-    // request the next animation frame to continue the game loop
+    // Check collision with walls and adjust position if necessary
+    let nextPositionX = this.positionX;
+    let nextPositionY = this.positionY;
+
+
+    // Update player's position
+    this.positionX = nextPositionX;
+    this.positionY = nextPositionY;
+
+    // Calculate rotation angle for waddling effect
+    let rotationAngle = 0;
+    if (accelerationX !== 0 || accelerationY !== 0) {
+      rotationAngle = Math.sin(Date.now() * 0.01) * 9; // Adjust the multiplier to control the waddling speed
+    }
+
+    // Update the HTML playerBody's transform property to move and rotate the player on the screen
+    this.playerWrapper.style.transform = `translate(${this.positionX}px, ${this.positionY}px) rotate(${rotationAngle}deg)`;
+
+    // Request the next animation frame to continue the game loop
     requestAnimationFrame(() => this.gameLoop());
   }
 }
