@@ -49,8 +49,8 @@ class Player {
     this.moveSpeed = (playerStats.speed * 10);
 
     // initial position
-    this.positionX = 0;
-    this.positionY = 0;
+    this.positionX = 500;
+    this.positionY = 500;
 
     //  velocity
     this.velocityX = 0;
@@ -122,19 +122,19 @@ class Player {
     let accelerationX = 0;
     let accelerationY = 0;
 
-    if (this.keys[this.keyConfig.up] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.up] && (this.playerWrapper.getBoundingClientRect())) {
       accelerationY -= this.acceleration;
       this.playerColideDirection = "up";
     }
-    if (this.keys[this.keyConfig.left] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.left] && (this.playerWrapper.getBoundingClientRect())) {
       accelerationX -= this.acceleration;
       this.playerColideDirection = "left";
     }
-    if (this.keys[this.keyConfig.down] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.down] && (this.playerWrapper.getBoundingClientRect())) {
       accelerationY += this.acceleration;
       this.playerColideDirection = "down";
     }
-    if (this.keys[this.keyConfig.right] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.right] && (this.playerWrapper.getBoundingClientRect())) {
       accelerationX += this.acceleration;
       this.playerColideDirection = "right";
     }
