@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P</title>
+</head>
+<body>
+    <input id="peerid" placeholder="My ID"> 
+    <button onclick="join()">Join</button><br>
+
+    <input type="text" id="fpeerid" placeholder="Peer ID"> 
+    <button id="connect" onclick="connect()">Connect</button><br>
+
+    <input type="text" id="msg" placeholder="Message..">
+    <button id="send" onclick="sendMessage()">Send</button> <br>
+
+    <ul id="messages">
+
+    </ul>
+
+    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+    <script>
+        function join() {
+            console.log("Connecting..")
+            peer = new Peer();
+
+            // when connection is created, handle the event - 
+            peer.on('open', function (id) {
+                console.log('Connected to Signaling Server ID : ' + id);
+                // set the input value
+                var peerIDField = document.querySelector("#peerid")
+                peerIDField.value = id
+            });
+
+            peer.on('connection', function (c) {
+                conn = c
+                console.log("New connection : ")
+                console.log(conn)
+
+                // set the friend peer id we just got
+                var fpeerIDField = document.querySelector("#fpeerid")
+                fpeerIDField.value = c.peer
+
+                // handle message receive
+                conn.on('open', function () {
+                    // Receive messages - receiver side
+                    conn.on('data', function (data) {
+                        console.log('Received', data);
+                        printMsg("Friend : " + data)
+                    });
+                });
+            });
+        }
+
+        function connect() {
+            var fpeerIDField = document.querySelector("#fpeerid")
+            console.log("connecting to " + fpeerIDField.value)
+            conn = peer.connect(fpeerIDField.value);
+
+            // open event called when connection gets created
+            conn.on('open', function () {
+                console.log("connected")
+                // Receive messages - sender side
+                conn.on('data', function (data) {
+                    console.log('Received', data);
+                    printMsg("Friend : " + data)
+                });
+            });
+        }
+
+        function sendMessage() {
+            var msg = document.querySelector("#msg")
+            console.log("sending message")
+            // send message at sender or receiver side
+            if (conn && conn.open) {
+                printMsg("Me : " + msg.value)
+                conn.send(msg.value);
+            }
+        }
+
+        function printMsg(msg) {
+            var messages = document.querySelector("#messages")
+            messages.innerHTML = messages.innerHTML + "<li>" + msg + "</li>"
+        }
+    </script>
+</body>
+</html>

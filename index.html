@@ -23,15 +23,59 @@
             display: block;
             width: 100%;
             height: 100%;
-            background-color: blue;
+            background-color: none;
             border-top-right-radius: 20px;
-            border-bottom-right-radius: 20px;
+            border-top-left-radius: 20px;
         }
-    </style>
 
+        /*walls testing*/
+        .coliderWalls, .green {
+            border: none;
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .coliderWalls {
+            background: red;
+        }
+
+        .green {
+            background: none;
+        }
+
+        .mapTable {
+            position: absolute;
+            height: auto;
+            background-image: url("assets/maps/Dungeon.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        
+
+        /**/
+
+    </style>
 </head>
-<body>    
-    <section class="section1">
+<body>
+
+    
+   <!--  <div class="wall" style="width: 100px; height: 150px; background-color: red;"></div> -->
+    <script src="./script/wallCollide.js"></script>
+    <script src="./script/classes/playerClass.js"></script>
+    <script src="./script/walls.js"></script>
+    <script>
+        //  players
+            let player1 = new Player('archer', {
+                up: 'w',
+                left: 'a',
+                down: 's',
+                right: 'd'
+            });
+    </script>  
+    <!-- <section class="section1">
     <div class="bannerBackground">
 
         <div class="darkenOverlay"></div>
@@ -214,7 +258,7 @@ function nextPage() {
 
 
 
-
-
+ -->
+ <div id="mapImg"><img src="" alt=""></div>
 </body>
 </html>
