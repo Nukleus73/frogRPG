@@ -147,18 +147,21 @@ class Player {
     this.velocityX += accelerationX;
     this.velocityY += accelerationY;
 
-    // Update player's position based on velocity
-    this.positionX += this.velocityX;
-    this.positionY += this.velocityY;
-
     // Check collision with walls and adjust position if necessary
-    let nextPositionX = this.positionX;
-    let nextPositionY = this.positionY;
+    let nextPositionX = this.positionX + this.velocityX;
+    let nextPositionY = this.positionY + this.velocityY;
 
-    
-    // Update player's position
-    this.positionX = nextPositionX;
-    this.positionY = nextPositionY;
+    // Check if the next position collides with any walls
+    if (!wallCollide({
+      x: nextPositionX,
+      y: nextPositionY,
+      width: this.playerWrapper.offsetWidth,
+      height: this.playerWrapper.offsetHeight
+    })) {
+      // Update player's position if no collision
+      this.positionX = nextPositionX;
+      this.positionY = nextPositionY;
+    }
 
     // Calculate rotation angle for waddling effect
     let rotationAngle = 0;
