@@ -1,4 +1,4 @@
-function wallCollide(player) {
+function wallCollide(player, direction) {
     let walls = document.getElementsByClassName("coliderWalls");
 
     for (let i = 0; i < walls.length; i++) {

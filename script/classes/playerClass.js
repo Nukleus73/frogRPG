@@ -122,19 +122,19 @@ class Player {
     let accelerationX = 0;
     let accelerationY = 0;
 
-    if (this.keys[this.keyConfig.up] && (this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.up] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       accelerationY -= this.acceleration;
       this.playerColideDirection = "up";
     }
-    if (this.keys[this.keyConfig.left] && (this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.left] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       accelerationX -= this.acceleration;
       this.playerColideDirection = "left";
     }
-    if (this.keys[this.keyConfig.down] && (this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.down] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       accelerationY += this.acceleration;
       this.playerColideDirection = "down";
     }
-    if (this.keys[this.keyConfig.right] && (this.playerWrapper.getBoundingClientRect())) {
+    if (this.keys[this.keyConfig.right] && !wallCollide(this.playerWrapper.getBoundingClientRect())) {
       accelerationX += this.acceleration;
       this.playerColideDirection = "right";
     }
@@ -155,7 +155,7 @@ class Player {
     let nextPositionX = this.positionX;
     let nextPositionY = this.positionY;
 
-
+    
     // Update player's position
     this.positionX = nextPositionX;
     this.positionY = nextPositionY;
