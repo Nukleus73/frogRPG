@@ -7,6 +7,9 @@
     <script src="script/multiplayer.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="scss/createGameBtn.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
     <title>Document</title>
     <style>
         /* FOR TESTING */
@@ -30,9 +33,12 @@
 <body>    
     <section class="section1">
     <div class="bannerBackground">
+
         <div class="darkenOverlay"></div>
+
         <button class="menuButton">Start Adventure</button>
         <button id="skipText" onclick="nextPage()">Skip</button>
+
         <div id="scrollContainer">
             <div id="scroll-text">
                 In the heart of the mystical lands of Amphibios, there once was a tale so <br>
@@ -98,13 +104,73 @@
 
 <section class="section2">
     <div id="bannerBackground2">
-        <div id="buttonMenu">
-            <button id="menuButton1">Choose Character</button>
-            <button id="menuButton2">Start ADventure</button>
-            <button id="menuButton3">Working progress</button>
+
+
+        <div class="gameStartMenu">
+            <div class="container">
+                <button id="button">Create Game</button>
+            </div>
+        </div>
+        <script>
+            $(function() {
+                $("#button").click(function() {
+                    $(this).addClass("onclic");
+                    validate();
+                });
+        
+                function validate() {
+                    setTimeout(function() {
+                        $("#button").removeClass("onclic").addClass("validate");
+                        callback();
+                    }, 2250); // Juster denne timingen basert på den faktiske varigheten av din CSS-animasjon
+                }
+        
+                function callback() {
+                    setTimeout(function() {
+                        $("#button").removeClass("validate");
+                    }, 3750); // Dette tallet bør være summen av varighetene av de to animasjonene, slik at 'validate' klassen fjernes etter at begge animasjonene er ferdig
+                }
+            });
+        </script>
+        <div class="classSelection">
+            <div class="grid" id="classSelection">
+                <div class="card" data-type="class1"><img src="/assets/cleric_Card_Background.jpg" alt="Class 1"><p class="classSelectionText">Cleric</p></div>
+                <div class="card" data-type="class2"><img src="/assets/mage_Card_Background.jpg" alt="Class 2"><p class="classSelectionText">Mage</p></div>
+                <div class="card" data-type="class3"><img src="/assets/ranger_Card_Background.jpg" alt="Class 3"><p class="classSelectionText">Ranger</p></div>
+                <div class="card" data-type="class4"><img src="/assets/worrior_Card_Background.jpg" alt="Class 4"><p class="classSelectionText">Worrior</p></div>
+            </div>
+            <br><br><br><br>
+            <div class="grid" id="colorSelection">
+                <div class="card" data-color="color1" style="background-color: #FF0000;"></div>
+                <div class="card" data-color="color2" style="background-color: #00FF00;"></div>
+                <div class="card" data-color="color3" style="background-color: #0000FF;"></div>
+                <div class="card" data-color="color4" style="background-color: #FFFF00;"></div>
+            </div>
+            <script>// script.js
+                document.addEventListener('DOMContentLoaded', () => {
+                    const classCards = document.querySelectorAll('#classSelection .card');
+                    const colorCards = document.querySelectorAll('#colorSelection .card');
+                
+                    const toggleActiveClass = (cards, clickedCard) => {
+                        cards.forEach(card => {
+                            card.classList.remove('active');
+                        });
+                        clickedCard.classList.add('active');
+                    };
+                
+                    classCards.forEach(card => {
+                        card.addEventListener('click', () => toggleActiveClass(classCards, card));
+                    });
+                
+                    colorCards.forEach(card => {
+                        card.addEventListener('click', () => toggleActiveClass(colorCards, card));
+                    });
+                });
+                </script>
         </div>
 
     </div>
+
 </section>
 
 <script>
