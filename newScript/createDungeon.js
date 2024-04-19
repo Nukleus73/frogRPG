@@ -16,8 +16,8 @@ function createDungeon() {
         // for every tile on the Y axis
         for (let y = 0; y < tileMap[0].length; y++) {
 
+            //  Randomizer for random tiles
             let randomTile = Boolean(tileProperties[tileMap[x][y]])
-            console.log(randomTile)
             if (randomTile) {
             var randomInt = Math.floor(Math.random() * tileProperties[tileMap[x][y]].randomRange)+1
             }
