@@ -1,7 +1,7 @@
 // ability class definition
 class Ability {
-    constructor(player, type, sybtype, parameters) {
-        switch (type) {
+    constructor(player, subtype, parameters) {
+        switch (subtype) {
             case 'AoE':
                 break;
             case 'physical':

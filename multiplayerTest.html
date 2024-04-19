@@ -1,88 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2P</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PeerJS Multiplayer Game</title>
+<style>
+    .player {
+        width: 50px;
+        height: 50px;
+        background-color: blue;
+        position: absolute;
+    }
+</style>
 </head>
 <body>
-    <input id="peerid" placeholder="My ID"> 
-    <button onclick="join()">Join</button><br>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.3.2/dist/peerjs.min.js"></script>
+<script>
+    function generateRandomID() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let randomID = '';
+        for (let i = 0; i < 5; i++) {
+            randomID += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return randomID;
+    }
 
-    <input type="text" id="fpeerid" placeholder="Peer ID"> 
-    <button id="connect" onclick="connect()">Connect</button><br>
+    let peerID = generateRandomID();
+    console.log('My peer ID is: ' + peerID);
 
-    <input type="text" id="msg" placeholder="Message..">
-    <button id="send" onclick="sendMessage()">Send</button> <br>
+    let peer = new Peer(peerID); // Create a new PeerJS instance with the generated ID
+    let connections = {}; // To store connections with other peers
 
-    <ul id="messages">
+    let localPlayer = document.createElement('div');
+    localPlayer.className = 'player';
+    localPlayer.style.top = '200px';
+    localPlayer.style.left = '300px';
+    document.body.appendChild(localPlayer);
 
-    </ul>
+    function movePlayer(keyCode) {
+        const speed = 5;
+        const rect = localPlayer.getBoundingClientRect();
+        let newX = rect.left;
+        let newY = rect.top;
 
-    <script src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
-    <script>
-        function join() {
-            console.log("Connecting..")
-            peer = new Peer();
-
-            // when connection is created, handle the event - 
-            peer.on('open', function (id) {
-                console.log('Connected to Signaling Server ID : ' + id);
-                // set the input value
-                var peerIDField = document.querySelector("#peerid")
-                peerIDField.value = id
-            });
-
-            peer.on('connection', function (c) {
-                conn = c
-                console.log("New connection : ")
-                console.log(conn)
-
-                // set the friend peer id we just got
-                var fpeerIDField = document.querySelector("#fpeerid")
-                fpeerIDField.value = c.peer
-
-                // handle message receive
-                conn.on('open', function () {
-                    // Receive messages - receiver side
-                    conn.on('data', function (data) {
-                        console.log('Received', data);
-                        printMsg("Friend : " + data)
-                    });
-                });
-            });
+        if (keyCode === 37) { // Left arrow key
+            newX -= speed;
+        } else if (keyCode === 38) { // Up arrow key
+            newY -= speed;
+        } else if (keyCode === 39) { // Right arrow key
+            newX += speed;
+        } else if (keyCode === 40) { // Down arrow key
+            newY += speed;
         }
 
-        function connect() {
-            var fpeerIDField = document.querySelector("#fpeerid")
-            console.log("connecting to " + fpeerIDField.value)
-            conn = peer.connect(fpeerIDField.value);
+        localPlayer.style.left = newX + 'px';
+        localPlayer.style.top = newY + 'px';
 
-            // open event called when connection gets created
-            conn.on('open', function () {
-                console.log("connected")
-                // Receive messages - sender side
-                conn.on('data', function (data) {
-                    console.log('Received', data);
-                    printMsg("Friend : " + data)
-                });
+        // Send movement data to all connected peers
+        for (const peerID in connections) {
+            connections[peerID].send({
+                keyCode: keyCode,
+                position: { x: newX, y: newY }
             });
         }
+    }
 
-        function sendMessage() {
-            var msg = document.querySelector("#msg")
-            console.log("sending message")
-            // send message at sender or receiver side
-            if (conn && conn.open) {
-                printMsg("Me : " + msg.value)
-                conn.send(msg.value);
-            }
+    document.addEventListener('keydown', (event) => {
+        movePlayer(event.keyCode);
+    });
+
+    peer.on('open', () => {
+        console.log('Peer connection established with ID: ' + peerID);
+    });
+
+    peer.on('connection', (conn) => {
+        console.log('New connection: ', conn.peer);
+        connections[conn.peer] = conn;
+
+        // Create a new player for the connected peer
+        let newPlayer = document.createElement('div');
+        newPlayer.className = 'player';
+        newPlayer.id = conn.peer;
+        newPlayer.style.top = '200px';
+        newPlayer.style.left = '300px';
+        document.body.appendChild(newPlayer);
+
+        conn.on('data', (data) => {
+            // Handle data from other peers (if any)
+            console.log('Received data from ' + conn.peer + ': ' + JSON.stringify(data));
+            // Move the player of the connected peer
+            moveOtherPlayer(data, conn.peer);
+        });
+    });
+
+    function moveOtherPlayer(data, peerID) {
+        const speed = 5;
+        let otherPlayer = document.getElementById(peerID);
+
+        if (!otherPlayer) return;
+
+        let newX = parseInt(data.position.x);
+        let newY = parseInt(data.position.y);
+
+        if (data.keyCode === 37) { // Left arrow key
+            newX -= speed;
+        } else if (data.keyCode === 38) { // Up arrow key
+            newY -= speed;
+        } else if (data.keyCode === 39) { // Right arrow key
+            newX += speed;
+        } else if (data.keyCode === 40) { // Down arrow key
+            newY += speed;
         }
 
-        function printMsg(msg) {
-            var messages = document.querySelector("#messages")
-            messages.innerHTML = messages.innerHTML + "<li>" + msg + "</li>"
-        }
-    </script>
+        otherPlayer.style.left = newX + 'px';
+        otherPlayer.style.top = newY + 'px';
+    }
+
+    function connectToPeer(peerID) {
+        let conn = peer.connect(peerID);
+        connections[peerID] = conn;
+
+        // Create a new player for the connected peer
+        let newPlayer = document.createElement('div');
+        newPlayer.className = 'player';
+        newPlayer.id = peerID;
+        newPlayer.style.top = '200px';
+        newPlayer.style.left = '300px';
+        document.body.appendChild(newPlayer);
+
+        conn.on('open', () => {
+            console.log('Connected to peer: ' + peerID);
+        });
+
+        conn.on('data', (data) => {
+            // Handle data from other peers (if any)
+            console.log('Received data from ' + conn.peer + ': ' + JSON.stringify(data));
+            // Move the player of the connected peer
+            moveOtherPlayer(data, conn.peer);
+        });
+    }
+</script>
 </body>
 </html>

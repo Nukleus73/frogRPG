@@ -76,62 +76,62 @@
 }
 
 
-  .menuButton {
-      font-size: 34px; 
-      padding: 10px 30px;
-      border-radius: 25px; 
-      border: none; 
-      background: rgba(135, 206, 235, 0.3); 
-      color: white; 
-      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
-      transition: all 0.3s ease;  
-      width: 20vw;
-      height: 6vh;
-    }
-
-    .menuButton:hover {
-      background: rgba(135, 206, 235, 0.5); 
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
+.menuButton {
+    font-size: 34px; 
+    padding: 10px 30px;
+    border-radius: 25px; 
+    border: none; 
+    background: rgba(135, 206, 235, 0.3); 
+    color: white; 
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
+    transition: all 0.3s ease;  
+    width: 20vw;
+    height: 6vh;
   }
 
-  
-    .menuButton:active {
-      background: rgba(135, 206, 235, 0.7); 
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-      transform: translateY(2px); 
-    }
+  .menuButton:hover {
+    background: rgba(135, 206, 235, 0.5); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
+}
 
-    #skipText {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      margin: 30px;
-      font-size: 34px; 
-      padding: 10px 30px;
-      border-radius: 25px; 
-      border: none; 
-      background: rgba(135, 206, 235, 0.3); 
-      color: white; 
-      box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
-      width: 20vw;
-      height: 6vh;
-    }
 
-    #skipText:hover {
-      background: rgba(135, 206, 235, 0.5); 
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
+  .menuButton:active {
+    background: rgba(135, 206, 235, 0.7); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+    transform: translateY(2px); 
   }
 
-  
-    #skipText:active {
-      background: rgba(135, 206, 235, 0.7); 
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
-      transform: translateY(2px); 
-    }
+  #skipText {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 30px;
+    font-size: 34px; 
+    padding: 10px 30px;
+    border-radius: 25px; 
+    border: none; 
+    background: rgba(135, 206, 235, 0.3); 
+    color: white; 
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.7); 
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); 
+    width: 20vw;
+    height: 6vh;
+  }
+
+  #skipText:hover {
+    background: rgba(135, 206, 235, 0.5); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);  
+}
+
+
+  #skipText:active {
+    background: rgba(135, 206, 235, 0.7); 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+    transform: translateY(2px); 
+  }
 
 
 
@@ -219,8 +219,58 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      position: relative;
+      z-index: 1;
       overflow: hidden;
+    }
+
+    .classSelection {
+      width: 25%;
+      height: 100svh;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+    }
+
+
+    .gameStartMenu  {
+      width: 25%;
+      height: 100svh;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      right: 0;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4px 4px;
+    }
+
+    .card {
+      width: auto;
+      height: 200px;
+      border: 2px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative; 
+    }
+
+  .classSelectionText{
+    position: absolute;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+    top: 20px;
+  }
+
+    .card img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .card.active {
+      border-color: green;
     }
 
     #buttonMenu {
