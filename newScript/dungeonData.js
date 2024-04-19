@@ -1,98 +1,53 @@
-var tileMap = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 10, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
+var bitMap = createMatrix({x:30, y:30}, 20, 3, 5).tiles;
+var tileMap = formatMatrix(bitMap)
 
 var tileProperties = [
-    // 0 = Null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg",
-        randomRange: 20
-    },
-    // 1 = Top
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 2 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 3 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 4 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 5 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 6 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 7 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 8 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 9 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 10 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    },
-    // 11 = null
-    {
-        height: "0px",
-        width: "0px",
-        rotation: "0deg"
-    }
-]
+  // 0 = Floor
+  {
+    randomRange: 16,
+  },
+  // 1 = Top
+  {
+    randomRange: 4,
+  },
+  // 2 = Right
+  {
+    randomRange: 2,
+  },
+  // 3 = Bottom
+  {
+    randomRange: 2,
+  },
+  // 4 = Left
+  {
+    randomRange: 2,
+  },
+  // 5 = Top-right Corner
+  {
+    randomRange: false,
+  },
+  // 6 = Bottom-right Corner
+  {
+    randomRange: false,
+  },
+  // 7 = Bottom-left Corner
+  {
+    randomRange: false,
+  },
+  // 8 = Top-left Corner
+  {
+    randomRange: false,
+  },
+  // 9 = Small
+  {
+    randomRange: false,
+  },
+  // 10 = Full
+  {
+    randomRange: false,
+  },
+  // 11 = Void
+  {
+    randomRange: false,
+  }
+];

@@ -44,8 +44,8 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = 0.35;
-    this.friction = 0.8;
+    this.acceleration = 0.5;
+    this.friction = 0.4;
     this.moveSpeed = (playerStats.speed * 10);
 
     // initial position
@@ -162,12 +162,16 @@ class Player {
       this.positionX = nextPositionX;
       this.positionY = nextPositionY;
     }
+    else {
+            // Call collisionChecker function
+            collisionChecker(this);
+    }
 
     // Calculate rotation angle for waddling effect
     let rotationAngle = 0;
-    if (accelerationX !== 0 || accelerationY !== 0) {
-      rotationAngle = Math.sin(Date.now() * 0.01) * 9; // Adjust the multiplier to control the waddling speed
-    }
+    // if (accelerationX !== 0 || accelerationY !== 0) {
+    //   rotationAngle = Math.sin(Date.now() * 0.01) * 9; // Adjust the multiplier to control the waddling speed
+    // }
 
     // Update the HTML playerBody's transform property to move and rotate the player on the screen
     this.playerWrapper.style.transform = `translate(${this.positionX}px, ${this.positionY}px) rotate(${rotationAngle}deg)`;
