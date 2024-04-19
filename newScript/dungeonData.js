@@ -1,4 +1,4 @@
-var bitMap = createMatrix({x:30, y:30}, 20, 3, 5).tiles;
+var bitMap = createMatrix({x:30, y:30}, 8, 3, 5);
 var tileMap = formatMatrix(bitMap)
 
 var tileProperties = [
@@ -44,7 +44,7 @@ var tileProperties = [
   },
   // 10 = Full
   {
-    randomRange: false,
+    randomRange: 4,
   },
   // 11 = Void
   {
