@@ -18,7 +18,7 @@ function wallCollide(player) {
 }
 
 function collisionChecker(player) {
-    let walls = document.getElementsByClassName("coliderWalls");
+    let walls = document.getElementsByClassName("wall");
 
     if (wallCollide(player.playerWrapper.getBoundingClientRect())) { // Pass player's bounding rectangle to wallCollide function
         let newPos = { x: player.positionX, y: player.positionY }; // Correct syntax for creating newPos object
