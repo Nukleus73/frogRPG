@@ -45,7 +45,9 @@ function createDungeon(mapSize, numberOfRooms, minRoomSize, maxRoomSize, itemCha
 
             if (itemMap[x][y]) {
                 let decor = document.createElement("img")
-
+                if (itemMap[x][y] == 16) {
+                    decor.classList.add("playerSpawnPoint")
+                }
                 if (randomTile) {
                     decor.src = `./assets/tiles/tile-${itemMap[x][y]}-${randomInt2}.png`
                 }

@@ -23,6 +23,7 @@ body {
     overflow: hidden;
     border-radius: 15px;
     border: 5px solid white;
+    position: relative;
 }
 
 #map {
@@ -31,6 +32,7 @@ body {
     border-radius: 5px;
     width: 100%;
     scale: 2;
+    position: relative;
 }
 
 .tile {
@@ -43,4 +45,13 @@ body {
     top: 0;
     display: block;
     position: absolute;
+}
+
+.playerWrapper {
+    position: absolute;
+    width: 5%;
+}
+
+.playerBody {
+    width: 100%;
 }
