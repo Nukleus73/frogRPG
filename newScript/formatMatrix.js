@@ -139,8 +139,9 @@ function formatMatrix(matrix, itemChance) {
       }
 
       // Decor, items and ladder addition
-      if (center == 0 && top == 0 && right == 0 && bottom == 0 && left == 0) {
-        tileSelection.push([x, y]);
+      if (center == 0 && top == 0 && right == 0 && bottom == 0 && left == 0
+        && topRight == 0 && bottomRight == 0 && bottomLeft == 0 && topLeft == 0) {
+        tileSelection.push([y, x]);
       }
 
       const randomNumber = Math.floor(Math.random() * 100) + 1;
@@ -151,7 +152,6 @@ function formatMatrix(matrix, itemChance) {
     }
   }
   let playerSpawnPoint = tileSelection[Math.floor(Math.random() * tileSelection.length)]
-  newMatrix[playerSpawnPoint.y, playerSpawnPoint.x] = 17
-
+  itemMap[playerSpawnPoint[0]][playerSpawnPoint[1]] = 16
   return newMatrix;
 }
