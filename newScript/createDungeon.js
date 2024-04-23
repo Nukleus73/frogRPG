@@ -1,6 +1,11 @@
 let gameContainer = document.querySelector("#gameContainer")
+var bitMap;
+var tileMap;
 
-function createDungeon() {
+function createDungeon(mapSize, numberOfRooms, minRoomSize, maxRoomSize, itemChance) {
+
+    bitMap = createMatrix(mapSize, numberOfRooms, minRoomSize, maxRoomSize);
+    tileMap = formatMatrix(bitMap, itemChance)
 
     //  make a table
     let table = document.createElement("table")
@@ -19,7 +24,8 @@ function createDungeon() {
             //  Randomizer for random tiles
             let randomTile = Boolean(tileProperties[tileMap[x][y]])
             if (randomTile) {
-            var randomInt = Math.floor(Math.random() * tileProperties[tileMap[x][y]].randomRange)+1
+                var randomInt = Math.floor(Math.random() * tileProperties[tileMap[x][y]].randomRange) + 1
+                var randomInt2 = Math.floor(Math.random() * tileProperties[itemMap[x][y]].randomRange) + 1
             }
 
             // make a tile and give it a class
@@ -37,6 +43,17 @@ function createDungeon() {
             }
             tile.appendChild(img)
 
+            if (itemMap[x][y]) {
+                let decor = document.createElement("img")
+
+                if (randomTile) {
+                    decor.src = `./assets/tiles/tile-${itemMap[x][y]}-${randomInt2}.png`
+                }
+                else {
+                    decor.src = `./assets/tiles/tile-${itemMap[x][y]}-1.png`
+                }
+                tile.appendChild(decor)
+            }
             //  make a collition container, give it class and append it
             let coll = document.createElement("div")
             coll.classList.add("wall")
@@ -52,6 +69,6 @@ function createDungeon() {
         table.appendChild(row)
     }
 
+    gameContainer.innerHTML = ""
     gameContainer.appendChild(table)
 }
-createDungeon()

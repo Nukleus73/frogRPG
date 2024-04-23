@@ -20,21 +20,29 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 5px solid white;
 }
 
 #map {
-    height: 800px;
     aspect-ratio: 1;
     border-collapse: collapse;
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .4);
     border-radius: 5px;
-    overflow: hidden;
+    width: 100%;
+    scale: 2;
+}
+
+.tile {
+    position: relative;
 }
 
 .tile img {
     height: 100%;
     aspect-ratio: 1;
+    top: 0;
     display: block;
+    position: absolute;
 }
 
 .wall {

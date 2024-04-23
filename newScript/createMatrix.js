@@ -6,7 +6,6 @@
 // base on the concepts found here: https://medium.com/@victorcatalintorac/dungeon-with-rooms-algorithm-for-javascript-ultimate-begginer-guide-ec1489e90314
 // feel free to use this for any purpose.
 function createMatrix(mapSize, maxRooms, minRoomSize, maxRoomSize) {
-  
     // defaults
     maxRooms = maxRooms || 12;
     minRoomSize = minRoomSize || 4;

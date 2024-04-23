@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,11 @@
 
     <script src="./newScript/createMatrix.js"></script>
     <script src="./newScript/formatMatrix.js"></script>
-    <script src="./newScript/dungeonData.js"></script>
+    <script src="./newScript/tileProperties.js"></script>
+    <script src="./script/classes/playerClass.js"></script>
+    <script src="./script/wallCollide.js"></script>
 </head>
+
 <body>
     <section id="gameSettings">
         <div id="characterSelect">
@@ -24,5 +28,8 @@
     <section id="gameContainer"></section>
 
     <script src="./newScript/createDungeon.js"></script>
+    <script src="./newScript/startGame.js"></script>
+    <script>    startGame("", "archer") </script>
 </body>
+
 </html>

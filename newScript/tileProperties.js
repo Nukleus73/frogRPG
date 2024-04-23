@@ -1,6 +1,3 @@
-var bitMap = createMatrix({x:30, y:30}, 8, 3, 5);
-var tileMap = formatMatrix(bitMap)
-
 var tileProperties = [
   // 0 = Floor
   {
@@ -49,5 +46,27 @@ var tileProperties = [
   // 11 = Void
   {
     randomRange: false,
+  },
+  // 12 = Treasure
+  {
+    randomRange: 7,
+  },
+  // 13 = Health potion
+  {
+    randomRange: 1,
+  },
+  // 14 = Mana potion
+  {
+    randomRange: 1,
+  },
+  // 15 = Floor decor DECAPITATED
+  {
+    randomRange: 5,
+  },
+  // 16 = Ladder
+  {
+    randomRange: false,
   }
+  //  17 = Player Spawn
+  //  18 = Enemy Spawn
 ];

@@ -1,8 +1,12 @@
-function formatMatrix(matrix) {
+var itemMap;
+
+function formatMatrix(matrix, itemChance) {
   console.log(matrix);
 
   matrix = matrix.tiles;
+  itemMap = matrix.map(row => Array(row.length).fill(0));
   let newMatrix = matrix.map((row) => row.slice());
+  let tileSelection = [];
 
   // Iterate over every cell
   for (let y = 0; y < matrix.length; y++) {
@@ -69,7 +73,7 @@ function formatMatrix(matrix) {
       }
     }
   }
-
+  //  Wall bug fixing
   for (let y = 0; y < newMatrix.length; y++) {
     for (let x = 0; x < newMatrix[0].length; x++) {
       let center = newMatrix[y][x];
@@ -90,17 +94,64 @@ function formatMatrix(matrix) {
       let topLeft = y > 0 && x > 0 ? newMatrix[y - 1][x - 1] : undefined;
 
       if (
-        ![top, right, bottom, left, center].includes(11) &&
-        ![top, right, bottom, left, center].includes(0) &&
-        ![top, right, bottom, left, center].includes(undefined) &&
-        center !== 11 && center !== 0 && center !== undefined
+        (top !== 0 &&
+          top !== 11 &&
+          top !== undefined &&
+          right !== 0 &&
+          right !== 11 &&
+          right !== undefined &&
+          left == 0 &&
+          bottom !== 0 &&
+          bottom !== 11 &&
+          bottom !== undefined) ||
+        (top !== 0 &&
+          top !== 11 &&
+          top !== undefined &&
+          right == 0 &&
+          left !== 0 &&
+          left !== 11 &&
+          left !== undefined &&
+          bottom !== 0 &&
+          bottom !== 11 &&
+          bottom !== undefined) ||
+        (top !== 0 &&
+          top !== 11 &&
+          top !== undefined &&
+          right !== 0 &&
+          right !== 11 &&
+          right !== undefined &&
+          left !== 0 &&
+          left !== 11 &&
+          left !== undefined &&
+          bottom == 0) ||
+        (top == 0 &&
+          right !== 0 &&
+          right !== 11 &&
+          right !== undefined &&
+          left !== 0 &&
+          left !== 11 &&
+          left !== undefined &&
+          bottom !== 0 &&
+          bottom !== 11 &&
+          bottom !== undefined)
       ) {
         newMatrix[y][x] = 10;
-        console.log(y + x);
-      } 
-   
+      }
+
+      // Decor, items and ladder addition
+      if (center == 0 && top == 0 && right == 0 && bottom == 0 && left == 0) {
+        tileSelection.push([x, y]);
+      }
+
+      const randomNumber = Math.floor(Math.random() * 100) + 1;
+      if (center == 0 && (randomNumber / 100) < itemChance
+        && (top == 0 && bottom == 0 && left == 0 && right == 0)) { //  Item variable
+        itemMap[y][x] = Math.floor(Math.random() * 3) + 12
+      }
     }
   }
+  let playerSpawnPoint = tileSelection[Math.floor(Math.random() * tileSelection.length)]
+  newMatrix[playerSpawnPoint.y, playerSpawnPoint.x] = 17
 
   return newMatrix;
 }
