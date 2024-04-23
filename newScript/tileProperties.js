@@ -63,10 +63,9 @@ var tileProperties = [
   {
     randomRange: 5,
   },
-  // 16 = Ladder
+  // 16 = Ladder / playerspawn
   {
     randomRange: false,
   }
-  //  17 = Player Spawn
   //  18 = Enemy Spawn
 ];

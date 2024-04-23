@@ -54,13 +54,9 @@ function createDungeon(mapSize, numberOfRooms, minRoomSize, maxRoomSize, itemCha
                 }
                 tile.appendChild(decor)
             }
-            //  make a collition container, give it class and append it
-            let coll = document.createElement("div")
-            coll.classList.add("wall")
-            coll.style.height = tileProperties[tileMap[x][y]].height
-            coll.style.width = tileProperties[tileMap[x][y]].width
-            coll.style.transform = `rotate(${tileProperties[tileMap[x][y]].rotation}`
-            tile.appendChild(coll)
+            if (bitMap.tiles[x][y] == 11){
+                tile.classList.add("wall")
+            }
 
             //  append the tile to the row
             row.appendChild(tile)
