@@ -1,5 +1,5 @@
 function wallCollide(player) {
-    let walls = document.getElementsByClassName("coliderWalls");
+    let walls = document.getElementsByClassName("wall");
 
     for (let i = 0; i < walls.length; i++) {
         let wall = walls[i].getBoundingClientRect();
@@ -16,13 +16,11 @@ function wallCollide(player) {
 
     return false; // No collision detected
 }
-
 function collisionChecker(player) {
     let walls = document.getElementsByClassName("wall");
 
-    if (wallCollide(player.playerWrapper.getBoundingClientRect())) { // Pass player's bounding rectangle to wallCollide function
+    if (wallCollide(player.getBoundingClientRect())) { // Pass player's bounding rectangle to wallCollide function
         let newPos = { x: player.positionX, y: player.positionY }; // Correct syntax for creating newPos object
-        console.log('kajajpoajajia')
 
         for (let i = 0; i < walls.length; i++) {
             let wallRect = walls[i].getBoundingClientRect();

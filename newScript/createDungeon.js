@@ -34,6 +34,7 @@ function createDungeon(mapSize, numberOfRooms, minRoomSize, maxRoomSize, itemCha
 
             //  make an image, give it source and append it
             let img = document.createElement("img")
+            img.draggable = false;
 
             if (randomTile) {
                 img.src = `./assets/tiles/tile-${tileMap[x][y]}-${randomInt}.png`

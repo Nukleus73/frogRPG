@@ -1,14 +1,45 @@
 // ability class definition
 class Ability {
-    constructor(player, subtype, parameters) {
-        switch (subtype) {
-            case 'AoE':
+    constructor(player, ability) {
+        switch (ability) {
+            //  Warrior
+            case 'warriorStrike':
                 break;
-            case 'physical':
+            case 'Aggro Draw':
                 break;
-            case 'projectile':
+            case 'Spin':
                 break;
-            case 'cone':
+            case 'Stone Form':
+                break;
+
+            //  Mage
+            case 'mageStrike':
+                break;
+            case 'Lightning Bolt':
+                break;
+            case 'Meteor Strike':
+                break;
+            case 'Freeze':
+                break;
+
+            //  Archer
+            case 'archerStrike':
+                break;
+            case 'Rapid Fire':
+                break;
+            case 'Charge Shot':
+                break;
+            case 'Arrow Rain':
+                break;
+
+            //  Cleric
+            case 'clericStrike':
+                break;
+            case 'Holy Hand Grenade':
+                break;
+            case 'Sacred Bind':
+                break;
+            case 'Sacred Prayer':
                 break;
         }
     }
