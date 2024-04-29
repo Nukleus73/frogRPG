@@ -8,6 +8,7 @@
 
 body {
     height: 100vh;
+    background-color: #25131a;
 }
 
 #gameSettings {
@@ -22,8 +23,12 @@ body {
     align-items: center;
     overflow: hidden;
     border-radius: 15px;
-    border: 5px solid white;
+    border: 5px solid #6e4a48;
     position: relative;
+}
+
+#gameContainer::after {
+    
 }
 
 #map {
@@ -45,11 +50,12 @@ body {
     top: 0;
     display: block;
     position: absolute;
+    image-rendering: pixelated;
 }
 
 .playerWrapper {
     position: absolute;
-    width: 5%;
+    width: 7%;
 }
 
 .playerBody {

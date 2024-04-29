@@ -165,18 +165,9 @@ class Player {
     let deltaY = this.velocityY;
 
     // Check if the map's movement would cause it to go out of bounds
-    if (
-      mapRect.left + deltaX >= 0 &&
-      mapRect.right + deltaX <= window.innerWidth
-    ) {
+
       map.style.left = parseFloat(map.style.left) - deltaX + "px";
-    }
-    if (
-      mapRect.top + deltaY >= 0 &&
-      mapRect.bottom + deltaY <= window.innerHeight
-    ) {
       map.style.top = parseFloat(map.style.top) - deltaY + "px";
-    }
 
     // Request the next animation frame to continue the game loop
     requestAnimationFrame(() => this.gameLoop());
