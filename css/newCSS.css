@@ -17,19 +17,21 @@ body {
 #gameContainer {
     width: 100%;
     height: 100%;
-    border: 20px solid transparent;
-    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 5px solid white;
+    position: relative;
 }
 
 #map {
-    border-collapse: collapse;
     aspect-ratio: 1;
-    border-radius: 15px;
-    overflow: hidden;
-    height: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    width: 100%;
+    scale: 2;
     position: relative;
 }
 
@@ -43,23 +45,13 @@ body {
     top: 0;
     display: block;
     position: absolute;
-    image-rendering: pixelated;
 }
 
-.player {
+.playerWrapper {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 3%;
+    width: 5%;
 }
 
 .playerBody {
-    height: 100%;
-}
-
-.playerWeapon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 100%;
 }
