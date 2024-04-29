@@ -43,8 +43,8 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.01; // Adjust as needed
-    this.friction = 0.4;
+    this.acceleration = playerStats.speed * 0.04; // Adjust as needed
+    this.friction = 0.1;
     this.moveSpeed = playerStats.speed;
 
     // initial position
@@ -160,7 +160,6 @@ class Player {
 
     // Update map's position based on player's movement
     let map = document.querySelector("#map");
-    let mapRect = map.getBoundingClientRect();
     let deltaX = this.velocityX;
     let deltaY = this.velocityY;
 
