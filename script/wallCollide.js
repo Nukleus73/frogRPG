@@ -1,42 +1,23 @@
-function wallCollide(player) {
-    let walls = document.getElementsByClassName("wall");
-
+function wallCrashCheck(object1, direction, object2) {
+    const object1Rect = player.getBoundingClientRect();
+    const object2Rect = document.querySelectorAll(".wall");
     for (let i = 0; i < walls.length; i++) {
-        let wall = walls[i].getBoundingClientRect();
-
+        const wall = walls[i].getBoundingClientRect();
+        // Check if any wall is overlapping with the player
         if (
-            player.x < wall.x + wall.width &&
-            player.x + player.width > wall.x &&
-            player.y < wall.y + wall.height &&
-            player.y + player.height > wall.y
+            playerRect.x < wall.x + wall.width &&
+            playerRect.x + playerRect.width > wall.x &&
+            playerRect.y < wall.y + wall.height &&
+            playerRect.y + playerRect.height > wall.y
         ) {
+            // Additional logic can be implemented to handle the direction of the wall's movement
             return true; // Collision detected
         }
     }
 
     return false; // No collision detected
+
 }
-function collisionChecker(player) {
-    let walls = document.getElementsByClassName("wall");
 
-    if (wallCollide(player.getBoundingClientRect())) { // Pass player's bounding rectangle to wallCollide function
-        let newPos = { x: player.positionX, y: player.positionY }; // Correct syntax for creating newPos object
+    
 
-        for (let i = 0; i < walls.length; i++) {
-            let wallRect = walls[i].getBoundingClientRect();
-            let objRect = player.playerWrapper.getBoundingClientRect();
-
-            if (player.velocityX > 0) // object came from the left
-                newPos.x = wallRect.left - objRect.width;
-            else if (player.velocityX < 0) // object came from the right
-                newPos.x = wallRect.right;
-            if (player.velocityY > 0) // object came from the top
-                newPos.y = wallRect.top - objRect.height;
-            else if (player.velocityY < 0) // object came from the bottom
-                newPos.y = wallRect.bottom;
-        }
-
-        player.positionX = newPos.x; // Update player's position
-        player.positionY = newPos.y;
-    }
-}
