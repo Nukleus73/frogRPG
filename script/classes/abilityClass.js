@@ -24,6 +24,8 @@ class Ability {
 
             //  Archer
             case 'archerStrike':
+                let arrow = document.createElement("img")
+                
                 break;
             case 'Rapid Fire':
                 break;
