@@ -43,8 +43,8 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.04; // Adjust as needed
-    this.friction = 0.1;
+    this.acceleration = playerStats.speed * 0.02; // Adjust as needed
+    this.friction = 0.8;
     this.moveSpeed = playerStats.speed;
 
     // initial position
@@ -103,10 +103,10 @@ class Player {
     // class definitions
     switch (frog_class) {
       case "archer":
-        this.playerWeapon.style.width = "50%";
-        this.playerWeapon.style.transform = "rotate(90deg)";
-        this.playerWeapon.style.top = "-20%";
-        this.playerWeapon.style.left = "15%";
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-40%";
+        this.playerWeapon.style.left = "-10%";
+        this.playerWeapon.style.paddingLeft = "80%";
         break;
     }
 
@@ -150,6 +150,17 @@ class Player {
       accelerationX += this.acceleration;
     }
 
+    // Normalize the acceleration vector if moving diagonally
+    if (accelerationX !== 0 && accelerationY !== 0) {
+      const diagonalAcceleration = Math.sqrt(
+        Math.pow(accelerationX, 2) + Math.pow(accelerationY, 2)
+      );
+      accelerationX =
+        (accelerationX / diagonalAcceleration) * this.acceleration;
+      accelerationY =
+        (accelerationY / diagonalAcceleration) * this.acceleration;
+    }
+
     // Apply friction to slow down the player's velocity
     this.velocityX *= this.friction;
     this.velocityY *= this.friction;
@@ -164,11 +175,40 @@ class Player {
     let deltaY = this.velocityY;
 
     // Check if the map's movement would cause it to go out of bounds
+    map.style.left = parseFloat(map.style.left) - deltaX + "px";
+    map.style.top = parseFloat(map.style.top) - deltaY + "px";
 
-      map.style.left = parseFloat(map.style.left) - deltaX + "px";
-      map.style.top = parseFloat(map.style.top) - deltaY + "px";
+    // Rotate the player's weapon to point towards the cursor
+    let cursor = document.querySelector("#cursor");
+    if (cursor) {
+      let playerCenterX = this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
+      let playerCenterY = this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
+      let cursorX = cursor.offsetLeft + cursor.offsetWidth / 2;
+      let cursorY = cursor.offsetTop + cursor.offsetHeight / 2;
+
+      let angle = Math.atan2(cursorY - playerCenterY, cursorX - playerCenterX);
+      this.playerWeapon.style.transform = `rotate(${angle}rad)`;
+    }
+
+    // Animate weapon movement
+    let weaponSpeed = 0.1; // Adjust as needed
+    let weaponRotation = parseFloat(this.playerWeapon.style.transform.replace("rotate(", "").replace("rad)", ""));
+    let targetRotation = Math.atan2(this.velocityY, this.velocityX);
+    let rotationDiff = targetRotation - weaponRotation;
+
+    // Normalize the rotation difference to ensure the shortest path
+    if (rotationDiff > Math.PI) {
+      rotationDiff -= 2 * Math.PI;
+    }
+    if (rotationDiff < -Math.PI) {
+      rotationDiff += 2 * Math.PI;
+    }
+
+    let rotationStep = rotationDiff * weaponSpeed;
+    this.playerWeapon.style.transform = `rotate(${weaponRotation + rotationStep}rad)`;
 
     // Request the next animation frame to continue the game loop
     requestAnimationFrame(() => this.gameLoop());
-  }
+}
+
 }

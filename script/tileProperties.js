@@ -59,13 +59,13 @@ var tileProperties = [
   {
     randomRange: 1,
   },
-  // 15 = Floor decor DECAPITATED
+  // 15 = First playerspawn
   {
-    randomRange: 5,
+    randomRange: false,
   },
-  // 16 = Ladder / playerspawn
+  // 16 = Ladder
   {
     randomRange: false,
   }
-  //  18 = Enemy Spawn
+  //  17 = Enemy Spawn
 ];
