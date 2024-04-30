@@ -96,7 +96,21 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  translate: -50% -50%;
+  transform: translate(-50%, -50%);
   border-radius: 100%;
   z-index: 2;
+  background-image: url("../assets/crosshair.png");
+  background-size: contain;
+}
+
+#cursor::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 1px;
+  box-shadow: 0 0 100px 20px #ffffff8e;
 }

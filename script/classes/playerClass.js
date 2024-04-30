@@ -77,6 +77,7 @@ class Player {
 
     //  keys
     this.keys = {};
+    this.mouse = {};
     this.keyConfig = {
       up: "w",
       left: "a",
@@ -125,6 +126,20 @@ class Player {
       this.keys[event.key] = false;
     });
 
+    // Add event listener for mouse clicks
+    document.addEventListener("mousedown", (event) => {
+      if (event.button === 0) {
+        this.mouse.left = true;
+      }
+    });
+
+    // Add event listener for mouse clicks
+    document.addEventListener("mouseup", (event) => {
+      if (event.button === 0) {
+        this.mouse.left = false;
+      }
+    });
+
     playerCounter++;
 
     // start the game loop
@@ -133,6 +148,10 @@ class Player {
 
   // behaviour of object
   gameLoop() {
+    if (!this.isAlive()) {
+      return; // Stop the game loop if the player is not alive
+    }
+
     // Check if specific keys are pressed and update acceleration accordingly
     let accelerationX = 0;
     let accelerationY = 0;
@@ -148,6 +167,9 @@ class Player {
     }
     if (this.keys[this.keyConfig.right]) {
       accelerationX += this.acceleration;
+    }
+    if (this.mouse.left) {
+      let attack = new Ability(this, "archerStrike")
     }
 
     // Normalize the acceleration vector if moving diagonally
@@ -181,8 +203,10 @@ class Player {
     // Rotate the player's weapon to point towards the cursor
     let cursor = document.querySelector("#cursor");
     if (cursor) {
-      let playerCenterX = this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
-      let playerCenterY = this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
+      let playerCenterX =
+        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
+      let playerCenterY =
+        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
       let cursorX = cursor.offsetLeft + cursor.offsetWidth / 2;
       let cursorY = cursor.offsetTop + cursor.offsetHeight / 2;
 
@@ -192,23 +216,21 @@ class Player {
 
     // Animate weapon movement
     let weaponSpeed = 0.1; // Adjust as needed
-    let weaponRotation = parseFloat(this.playerWeapon.style.transform.replace("rotate(", "").replace("rad)", ""));
-    let targetRotation = Math.atan2(this.velocityY, this.velocityX);
-    let rotationDiff = targetRotation - weaponRotation;
+    let weaponRotation = parseFloat(
+      this.playerWeapon.style.transform
+        .replace("rotate(", "")
+        .replace("rad)", "")
+    );
 
-    // Normalize the rotation difference to ensure the shortest path
-    if (rotationDiff > Math.PI) {
-      rotationDiff -= 2 * Math.PI;
-    }
-    if (rotationDiff < -Math.PI) {
-      rotationDiff += 2 * Math.PI;
-    }
-
-    let rotationStep = rotationDiff * weaponSpeed;
-    this.playerWeapon.style.transform = `rotate(${weaponRotation + rotationStep}rad)`;
+    this.playerWeapon.style.transform = `rotate(${weaponRotation - 0.2}rad)`;
 
     // Request the next animation frame to continue the game loop
     requestAnimationFrame(() => this.gameLoop());
-}
+  }
 
+  // Check if player is alive
+  isAlive() {
+    // Add your logic here to determine if the player is alive
+    return true; // For demonstration purposes, always return true
+  }
 }
