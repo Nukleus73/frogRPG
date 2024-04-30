@@ -155,17 +155,17 @@ class Player {
     // Check if specific keys are pressed and update acceleration accordingly
     let accelerationX = 0;
     let accelerationY = 0;
-
-    if (this.keys[this.keyConfig.up]) {
+    let walls = document.querySelectorAll(".wall")
+    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls)) {
       accelerationY -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.left]) {
+    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls)) {
       accelerationX -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.down]) {
+    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls)) {
       accelerationY += this.acceleration;
     }
-    if (this.keys[this.keyConfig.right]) {
+    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls)) {
       accelerationX += this.acceleration;
     }
     if (this.mouse.left) {
