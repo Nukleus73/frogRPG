@@ -54,17 +54,10 @@ function isColliding(object1, direction, object2, offset = 0) {
 
             // Check for collision
             if (
-<<<<<<< HEAD
                 object1Rect.x < object2Rect.x + object2Rect.width &&
                 object1Rect.x + object1Rect.width > object2Rect.x &&
                 object1Rect.y < object2Rect.y + object2Rect.height - 50 &&
                 object1Rect.y + object1Rect.height > object2Rect.y
-=======
-                object1Rect.x < adjustedObject2Rect.x + adjustedObject2Rect.width &&
-                object1Rect.x + object1Rect.width > adjustedObject2Rect.x &&
-                object1Rect.y < adjustedObject2Rect.y + adjustedObject2Rect.height &&
-                object1Rect.y + object1Rect.height > adjustedObject2Rect.y
->>>>>>> a509185682eae6084f5a96317c60f353d97fa6f6
             ) {
                 return true; // Collision detected
             }
@@ -82,17 +75,10 @@ function isColliding(object1, direction, object2, offset = 0) {
 
         // Check for collision
         if (
-<<<<<<< HEAD
             object1Rect.x < object2Rect.x + object2Rect.width &&
             object1Rect.x + object1Rect.width > object2Rect.x &&
             object1Rect.y < object2Rect.y + object2Rect.height &&
             object1Rect.y + object1Rect.height > object2Rect.y 
-=======
-            object1Rect.x < adjustedObject2Rect.x + adjustedObject2Rect.width &&
-            object1Rect.x + object1Rect.width > adjustedObject2Rect.x &&
-            object1Rect.y < adjustedObject2Rect.y + adjustedObject2Rect.height &&
-            object1Rect.y + object1Rect.height > adjustedObject2Rect.y
->>>>>>> a509185682eae6084f5a96317c60f353d97fa6f6
         ) {
             return true; // Collision detected
         }
