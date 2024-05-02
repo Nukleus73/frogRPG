@@ -65,6 +65,22 @@
 </head>
 <body>
 
+    <audio id="bg-music" loop>
+        <source src="assets/music/frog_game_menu.mp3" type="audio/mpeg">
+      </audio>
+
+    <script>
+  var bgMusic = document.getElementById("bg-music");
+
+function toggleMusic() {
+  if (bgMusic.paused) {
+    bgMusic.play();
+  } else {
+    bgMusic.pause();
+  }
+}
+    </script>
+
     
    <!--  <div class="wall" style="width: 100px; height: 150px; background-color: red;"></div> -->
     <script src="./script/wallCollide.js"></script>
@@ -86,7 +102,7 @@
 
         <div class="darkenOverlay"></div>
 
-        <button class="menuButton">Start Adventure</button>
+        <button class="menuButton" onclick="toggleMusic()">Start Adventure</button>
         <button id="skipText" onclick="nextPage()">Skip</button>
 
         <div id="scrollContainer">
