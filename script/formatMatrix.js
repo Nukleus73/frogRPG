@@ -127,7 +127,7 @@ function formatMatrix(matrix, itemChance) {
             const randomNumber = Math.floor(Math.random() * 100) + 1;
             if (center == 0 && (randomNumber / 100) < itemChance
                 && (top == 0 && bottom == 0 && left == 0 && right == 0)) { //  Item variable
-                itemMap[y][x] = Math.floor(Math.random() * 3) + 12
+                itemMap[y][x] = 12
             }
         }
     }

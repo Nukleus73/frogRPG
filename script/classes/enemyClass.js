@@ -1,1 +1,0 @@
-// husk å lag i canvas!

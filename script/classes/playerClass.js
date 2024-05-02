@@ -143,7 +143,9 @@ class Player {
     playerCounter++;
 
     // start the game loop
+    this.canShoot = true;
     this.gameLoop();
+
   }
 
   // behaviour of object
@@ -156,20 +158,25 @@ class Player {
     let accelerationX = 0;
     let accelerationY = 0;
     let walls = document.querySelectorAll(".wall")
-    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls, 60)) {
+    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls, 0)) {
       accelerationY -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls, 60)) {
+    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls, 0)) {
       accelerationX -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls, 60)) {
+    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls, 0)) {
       accelerationY += this.acceleration;
     }
-    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls, 60)) {
+    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls, 0)) {
       accelerationX += this.acceleration;
     }
-    if (this.mouse.left) {
-      let attack = new Ability(this, "archerStrike")
+    if (this.mouse.left && this.canShoot) {
+        let attack = new Ability(this, "archerStrike")  
+        this.canShoot = false;
+        console.log()
+        setTimeout(() => {
+        this.canShoot = true;
+        }, 800);
     }
 
     // Normalize the acceleration vector if moving diagonally
@@ -204,9 +211,9 @@ class Player {
     let cursor = document.querySelector("#cursor");
     if (cursor) {
       let playerCenterX =
-        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
+        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth + (this.playerWrapper.offsetWidth/4);
       let playerCenterY =
-        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
+        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight + (this.playerWrapper.offsetHeight/4);
       let cursorX = cursor.offsetLeft + cursor.offsetWidth / 2;
       let cursorY = cursor.offsetTop + cursor.offsetHeight / 2;
 
