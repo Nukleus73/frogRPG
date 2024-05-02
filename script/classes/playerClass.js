@@ -1,8 +1,14 @@
 let playerCounter = 0;
 
-// player class definition
+// Player class definition
 class Player {
   constructor(frog_class, username, peerId) {
+    // Check if there's an existing player and remove it
+    const existingPlayer = document.querySelector(".playerWrapper");
+    if (existingPlayer) {
+      existingPlayer.remove();
+    }
+
     let playerStats;
 
     switch (frog_class) {
@@ -47,7 +53,7 @@ class Player {
     this.friction = 0.8;
     this.moveSpeed = playerStats.speed;
 
-    // initial position
+    // Initial position
     let map = document.querySelector("#map");
     let spawn = document.querySelector(".playerSpawnPoint");
     let parentElement = document.querySelector("#gameContainer"); // Assuming parent element's ID is "parentElement"
@@ -88,7 +94,9 @@ class Player {
     //  create the wrapper for the whole player
     this.playerWrapper = document.createElement("div");
     this.playerWrapper.classList.add("playerWrapper");
-    this.playerWrapper.setAttribute("id", "player" + playerCounter);
+
+    // Assign id to the player wrapper
+    this.playerWrapper.id = "player" + playerCounter;
 
     // create the player body
     this.playerBody = document.createElement("img");
@@ -145,10 +153,9 @@ class Player {
     // start the game loop
     this.canShoot = true;
     this.gameLoop();
-
   }
 
-  // behaviour of object
+  // Behaviour of object
   gameLoop() {
     if (!this.isAlive()) {
       return; // Stop the game loop if the player is not alive
