@@ -1,41 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FrogRPG</title>
     <link rel="stylesheet" href="./css/style.css" />
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="./script/createMatrix.js"></script>
     <script src="./script/formatMatrix.js"></script>
     <script src="./script/tileProperties.js"></script>
     <script src="./script/isColliding.js"></script>
     <script src="./script/classes/abilityClass.js"></script>
+    <script src="./script/classes/treasureClass.js"></script>
     <script src="./script/classes/playerClass.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <section id="gameSettings">
-      <div id="characterSelect">
-        <a href="">Archer</a>
-        <a href=""></a>
-        <a href=""></a>
-        <a href=""></a>
-      </div>
-      <input type="text" id="sessionInput" />
-      <a href="" id="gameStartButton"></a>
+        <div id="characterSelect">
+            <a href="">Archer</a>
+            <a href=""></a>
+            <a href=""></a>
+            <a href=""></a>
+        </div>
+        <input type="text" id="sessionInput" />
+        <a href="" id="gameStartButton"></a>
     </section>
     <section id="gameContainer">
-      <div id="cursor" draggable="false"></div>
-      <div id="manabar">MANA</div>
-      <div id="healthbar">HEALTH</div>
+        <div id="cursor" draggable="false"></div>
+        <div id="bars">
+            <div id="manabar">
+                <ion-icon name="hand-left"></ion-icon>
+                <div></div>
+            </div>
+            <div id="healthbar">
+            <ion-icon name="heart"></ion-icon>
+                <div></div>
+            </div>
+        </div>
+        <div id="money">¨
+            <ion-icon name="server"></ion-icon>
+            <p>0</p>
+        </div>
     </section>
 
     <script src="./script/createDungeon.js"></script>
     <script src="./script/startGame.js"></script>
     <script src="./script/cursor.js"></script>
     <script>
-      startGame("", "archer");
+        startGame("", "archer");
     </script>
-  </body>
+</body>
+
 </html>

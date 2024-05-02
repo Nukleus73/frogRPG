@@ -51,11 +51,11 @@ var tileProperties = [
   {
     randomRange: 7,
   },
-  // 13 = Health potion
+  // 13 = Health potion DECAPITATED
   {
     randomRange: 1,
   },
-  // 14 = Mana potion
+  // 14 = Mana potion DECAPITATED
   {
     randomRange: 1,
   },

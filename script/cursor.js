@@ -1,10 +1,11 @@
 const blob = document.getElementById("cursor");
 
-document.body.onpointermove = event => {
+gameContainer.onpointermove = event => {
     const { clientX, clientY } = event;
+    const containerRect = gameContainer.getBoundingClientRect();
 
     blob.animate({
-        left: clientX + "px",
-        top: clientY + "px"
+        left: (clientX - containerRect.left) + "px",
+        top: (clientY - containerRect.top) + "px"
     }, {duration: 100, fill: "forwards"})
 }
