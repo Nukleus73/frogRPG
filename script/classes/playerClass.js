@@ -156,16 +156,16 @@ class Player {
     let accelerationX = 0;
     let accelerationY = 0;
     let walls = document.querySelectorAll(".wall")
-    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls)) {
+    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls, 60)) {
       accelerationY -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls)) {
+    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls, 60)) {
       accelerationX -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls)) {
+    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls, 60)) {
       accelerationY += this.acceleration;
     }
-    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls)) {
+    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls, 60)) {
       accelerationX += this.acceleration;
     }
     if (this.mouse.left) {
