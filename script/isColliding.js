@@ -6,7 +6,7 @@ function isColliding(object1, direction, object2) {
         case "up":
             object1Rect = {
                 x: object1Rect.x,
-                y: object1Rect.y - object1Rect.height,
+                y: object1Rect.y - 50,
                 width: object1Rect.width,
                 height: object1Rect.height
             };
@@ -14,14 +14,14 @@ function isColliding(object1, direction, object2) {
         case "down":
             object1Rect = {
                 x: object1Rect.x,
-                y: object1Rect.y + object1Rect.height,
+                y: object1Rect.y + 50,
                 width: object1Rect.width,
                 height: object1Rect.height
             };
             break;
         case "left":
             object1Rect = {
-                x: object1Rect.x - object1Rect.width,
+                x: object1Rect.x - 50,
                 y: object1Rect.y,
                 width: object1Rect.width,
                 height: object1Rect.height
@@ -29,7 +29,7 @@ function isColliding(object1, direction, object2) {
             break;
         case "right":
             object1Rect = {
-                x: object1Rect.x + object1Rect.width,
+                x: object1Rect.x + 50,
                 y: object1Rect.y,
                 width: object1Rect.width,
                 height: object1Rect.height
@@ -48,7 +48,7 @@ function isColliding(object1, direction, object2) {
             if (
                 object1Rect.x < object2Rect.x + object2Rect.width &&
                 object1Rect.x + object1Rect.width > object2Rect.x &&
-                object1Rect.y < object2Rect.y + object2Rect.height &&
+                object1Rect.y < object2Rect.y + object2Rect.height - 50 &&
                 object1Rect.y + object1Rect.height > object2Rect.y
             ) {
                 return true; // Collision detected
@@ -62,7 +62,7 @@ function isColliding(object1, direction, object2) {
             object1Rect.x < object2Rect.x + object2Rect.width &&
             object1Rect.x + object1Rect.width > object2Rect.x &&
             object1Rect.y < object2Rect.y + object2Rect.height &&
-            object1Rect.y + object1Rect.height > object2Rect.y
+            object1Rect.y + object1Rect.height > object2Rect.y 
         ) {
             return true; // Collision detected
         }
