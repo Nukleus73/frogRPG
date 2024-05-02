@@ -90,7 +90,8 @@ body {
 }
 
 .playerBody {
-    width: 100%;
+  width: 100%;
+  background-color: none;
 }
 
 #cursor {
@@ -156,6 +157,7 @@ body {
 #manabar ion-icon {
     font-size: 1rem;
 }
+
 
 #healthbar {
     border: 4px solid black;
