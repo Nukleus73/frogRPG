@@ -6,14 +6,6 @@ class Player {
     let playerStats;
 
     switch (frog_class) {
-      case "archer":
-        playerStats = {
-          health: 60,
-          mana: 70,
-          strength: 80,
-          speed: 100,
-        };
-        break;
       case "cleric":
         playerStats = {
           health: 100,
@@ -21,7 +13,14 @@ class Player {
           strength: 40,
           speed: 100,
         };
-        break;
+        case "archer":
+          playerStats = {
+            health: 60,
+            mana: 70,
+            strength: 80,
+            speed: 100,
+          };
+          break;
       case "mage":
         playerStats = {
           health: 40,

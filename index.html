@@ -35,7 +35,14 @@
     <script src="./script/startGame.js"></script>
     <script src="./script/cursor.js"></script>
     <script>
-      startGame("", "archer");
-    </script>
+ document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const characterType = urlParams.get('class');
+    console.log("Character Type:", characterType); // Check if this logs the expected value
+    startGame("", characterType);
+});
+
+        </script>
+        
   </body>
 </html>
