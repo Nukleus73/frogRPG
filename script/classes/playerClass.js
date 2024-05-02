@@ -49,8 +49,8 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.02; // Adjust as needed
-    this.friction = 0.8;
+    this.acceleration = playerStats.speed * 0.001; // Adjust as needed
+    this.friction = 0.95;
     this.moveSpeed = playerStats.speed;
 
     // Initial position
