@@ -48,7 +48,7 @@ function isColliding(object1, direction, object2) {
             if (
                 object1Rect.x < object2Rect.x + object2Rect.width &&
                 object1Rect.x + object1Rect.width > object2Rect.x &&
-                object1Rect.y < object2Rect.y + object2Rect.height - 50 &&
+                object1Rect.y < object2Rect.y + object2Rect.height - 30 &&
                 object1Rect.y + object1Rect.height > object2Rect.y
             ) {
                 return true; // Collision detected

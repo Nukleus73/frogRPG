@@ -59,7 +59,7 @@ function createDungeon(
         }
         switch (itemMap[x][y]) {
           case 12:
-            let treasure = new Treasure(x, y, randomInt2)
+            //let treasure = new Treasure(x, y, randomInt2)
             tile.classList.add("treasure");
             break;
 
