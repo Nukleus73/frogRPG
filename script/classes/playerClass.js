@@ -1,19 +1,17 @@
 let playerCounter = 0;
 
-// player class definition
+// Player class definition
 class Player {
   constructor(frog_class, username, peerId) {
+    // Check if there's an existing player and remove it
+    const existingPlayer = document.querySelector(".playerWrapper");
+    if (existingPlayer) {
+      existingPlayer.remove();
+    }
+
     let playerStats;
 
     switch (frog_class) {
-      case "archer":
-        playerStats = {
-          health: 60,
-          mana: 70,
-          strength: 80,
-          speed: 100,
-        };
-        break;
       case "cleric":
         playerStats = {
           health: 100,
@@ -21,7 +19,14 @@ class Player {
           strength: 40,
           speed: 100,
         };
-        break;
+        case "archer":
+          playerStats = {
+            health: 60,
+            mana: 70,
+            strength: 80,
+            speed: 100,
+          };
+          break;
       case "mage":
         playerStats = {
           health: 40,
@@ -43,11 +48,11 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.02; // Adjust as needed
-    this.friction = 0.8;
+    this.acceleration = playerStats.speed * 0.001; // Adjust as needed
+    this.friction = 0.95;
     this.moveSpeed = playerStats.speed;
 
-    // initial position
+    // Initial position
     let map = document.querySelector("#map");
     let spawn = document.querySelector(".playerSpawnPoint");
     let parentElement = document.querySelector("#gameContainer"); // Assuming parent element's ID is "parentElement"
@@ -88,7 +93,9 @@ class Player {
     //  create the wrapper for the whole player
     this.playerWrapper = document.createElement("div");
     this.playerWrapper.classList.add("playerWrapper");
-    this.playerWrapper.setAttribute("id", "player" + playerCounter);
+
+    // Assign id to the player wrapper
+    this.playerWrapper.id = "player" + playerCounter;
 
     // create the player body
     this.playerBody = document.createElement("img");
@@ -145,10 +152,9 @@ class Player {
     // start the game loop
     this.canShoot = true;
     this.gameLoop();
-
   }
 
-  // behaviour of object
+  // Behaviour of object
   gameLoop() {
     if (!this.isAlive()) {
       return; // Stop the game loop if the player is not alive
