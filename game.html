@@ -22,12 +22,7 @@
 
 <body>
     <section id="gameSettings">
-        <div id="characterSelect">
-            <a href="">Archer</a>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
-        </div>
+       
         <input type="text" id="sessionInput" />
         <a href="" id="gameStartButton"></a>
     </section>
@@ -55,18 +50,21 @@
             <ion-icon name="server"></ion-icon>
             <p>0</p>
         </div>
+        <div class="abilityMenu">
+            <div id="ability-1">
+            <div class="abilityText" onclick="">
+              Use ultimate ability, press "1"   
+            </div>
+   
+        </div>
     </section>
     <script src="./script/healthbar.js"></script>
     <script src="./script/createDungeon.js"></script>
     <script src="./script/startGame.js"></script>
     <script src="./script/cursor.js"></script>
+    <script src="./script/gameController.js"></script>
     <script>
- document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const characterType = urlParams.get('class');
-    console.log("Character Type:", characterType); // Check if this logs the expected value
-    startGame("", characterType);
-});
+
 
         </script>
         

@@ -1,35 +1,31 @@
 class Ability {
     constructor(player, ability) {
         switch (ability) {
-            // Warrior Abilities
             case 'Rage':
+                if (player.frog_class === 'warrior') {  // Correct usage
+                    const originalStats = { ...player.playerStats };  // Assuming playerStats is stored in player
+                    player.playerStats.health *= 8;
+                    player.playerStats.mana *= 8;
+                    player.playerStats.strength *= 8;
+                    player.playerStats.speed *= 8;
 
+                    console.log("Rage ability activated. Stats increased by 70% for 20 seconds.");
 
-                // Logic for warrior Rage ability
-                break;
-            case 'AggroDraw':
-                // Logic for aggro draw ability
-                break;
-            case 'Spin':
-                // Logic for spin ability
-                break;
-            case 'StoneForm':
-                // Logic for stone form ability
+                    setTimeout(() => {
+                        player.playerStats = originalStats;
+                        console.log("Rage ability ended. Stats returned to normal.");
+                    }, 20000);
+                }
                 break;
 
             // Mage Abilities
             case 'mageStrike':
                 // Logic for mage strike ability
+                
+
+                console.log("mageStrike ability activated. Stats increased by 70% for 20 seconds.");
                 break;
-            case 'LightningBolt':
-                // Logic for lightning bolt ability
-                break;
-            case 'MeteorStrike':
-                // Logic for meteor strike ability
-                break;
-            case 'Freeze':
-                // Logic for freeze ability
-                break;
+  
 
             // Archer Abilities
             case 'archerStrike':
@@ -81,31 +77,16 @@ class Ability {
             
                 // // Start arrow movement loop
                 // this.gameLoop();
-            
+                console.log("Archer strike ability activated. Stats increased by 70% for 20 seconds.");
                 break;
             
-            case 'RapidFire':
-                // Logic for rapid fire ability
-                break;
-            case 'ChargeShot':
-                // Logic for charge shot ability
-                break;
-            case 'ArrowRain':
-                // Logic for arrow rain ability
-                break;
 
             // Cleric Abilities
             case 'clericStrike':
                 // Logic for cleric strike ability
-                break;
-            case 'HolyHandGrenade':
-                // Logic for holy hand grenade ability
-                break;
-            case 'SacredBind':
-                // Logic for sacred bind ability
-                break;
-            case 'SacredPrayer':
-                // Logic for sacred prayer ability
+
+
+                console.log("Cleric strike ability activated. Stats increased by 70% for 20 seconds.");
                 break;
         }
     }
