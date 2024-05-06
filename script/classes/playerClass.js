@@ -1,14 +1,8 @@
 let playerCounter = 0;
 
-// Player class definition
+// player class definition
 class Player {
   constructor(frog_class, username, peerId) {
-    // Check if there's an existing player and remove it
-    const existingPlayer = document.querySelector(".playerWrapper");
-    if (existingPlayer) {
-      existingPlayer.remove();
-    }
-
     let playerStats;
 
     switch (frog_class) {
@@ -48,11 +42,11 @@ class Player {
     }
 
     //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.001; // Adjust as needed
-    this.friction = 0.95;
+    this.acceleration = playerStats.speed * 0.02; // Adjust as needed
+    this.friction = 0.8;
     this.moveSpeed = playerStats.speed;
 
-    // Initial position
+    // initial position
     let map = document.querySelector("#map");
     let spawn = document.querySelector(".playerSpawnPoint");
     let parentElement = document.querySelector("#gameContainer"); // Assuming parent element's ID is "parentElement"
@@ -93,9 +87,7 @@ class Player {
     //  create the wrapper for the whole player
     this.playerWrapper = document.createElement("div");
     this.playerWrapper.classList.add("playerWrapper");
-
-    // Assign id to the player wrapper
-    this.playerWrapper.id = "player" + playerCounter;
+    this.playerWrapper.setAttribute("id", "player" + playerCounter);
 
     // create the player body
     this.playerBody = document.createElement("img");
@@ -150,11 +142,10 @@ class Player {
     playerCounter++;
 
     // start the game loop
-    this.canShoot = true;
     this.gameLoop();
   }
 
-  // Behaviour of object
+  // behaviour of object
   gameLoop() {
     if (!this.isAlive()) {
       return; // Stop the game loop if the player is not alive
@@ -164,25 +155,20 @@ class Player {
     let accelerationX = 0;
     let accelerationY = 0;
     let walls = document.querySelectorAll(".wall")
-    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls, 0)) {
+    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls)) {
       accelerationY -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls, 0)) {
+    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls)) {
       accelerationX -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls, 0)) {
+    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls)) {
       accelerationY += this.acceleration;
     }
-    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls, 0)) {
+    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls)) {
       accelerationX += this.acceleration;
     }
-    if (this.mouse.left && this.canShoot) {
-        let attack = new Ability(this, "archerStrike")  
-        this.canShoot = false;
-        console.log()
-        setTimeout(() => {
-        this.canShoot = true;
-        }, 800);
+    if (this.mouse.left) {
+      let attack = new Ability(this, "archerStrike")
     }
 
     // Normalize the acceleration vector if moving diagonally
@@ -217,9 +203,9 @@ class Player {
     let cursor = document.querySelector("#cursor");
     if (cursor) {
       let playerCenterX =
-        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth + (this.playerWrapper.offsetWidth/4);
+        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
       let playerCenterY =
-        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight + (this.playerWrapper.offsetHeight/4);
+        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
       let cursorX = cursor.offsetLeft + cursor.offsetWidth / 2;
       let cursorY = cursor.offsetTop + cursor.offsetHeight / 2;
 

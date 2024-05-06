@@ -2,8 +2,10 @@ class Ability {
     constructor(player, ability) {
         switch (ability) {
             // Warrior Abilities
-            case 'warriorStrike':
-                // Logic for warrior strike ability
+            case 'Rage':
+
+
+                // Logic for warrior Rage ability
                 break;
             case 'AggroDraw':
                 // Logic for aggro draw ability
