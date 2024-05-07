@@ -1,15 +1,13 @@
 let playerCounter = 0;
-
 // player class definition
 class   Player {
   constructor(frog_class, username, peerId) {
-    let playerStats;
     this.frog_class = frog_class;  // Ensure the class type is saved to the instance
     this.playerStats = {};
 
     switch (frog_class) {
       case "cleric":
-        playerStats = {
+        this.playerStats = {
           health: 100,
           mana: 100,
           strength: 40,
@@ -17,7 +15,7 @@ class   Player {
         };
         break;
       case "archer":
-        playerStats = {
+        this.playerStats = {
           health: 60,
           mana: 70,
           strength: 80,
@@ -25,7 +23,7 @@ class   Player {
         };
         break;
       case "mage":
-        playerStats = {
+        this.playerStats = {
           health: 40,
           mana: 70,
           strength: 100,
@@ -33,7 +31,7 @@ class   Player {
         };
         break;
       case "warrior":
-        playerStats = {
+        this.playerStats = {
           health: 100,
           mana: 60,
           strength: 80,
@@ -43,11 +41,6 @@ class   Player {
       default:
         throw new Error(`[playerClass.js]: Class (${frog_class}) not found.`);
     }
-
-    //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.02; // Adjust as needed
-    this.friction = 0.8;
-    this.moveSpeed = playerStats.speed;
 
     // initial position
     let map = document.querySelector("#map");
@@ -148,12 +141,19 @@ class   Player {
     this.gameLoop();
   }
 
+
+  
   // behaviour of object
   gameLoop() {
     if (!this.isAlive()) {
       return; // Stop the game loop if the player is not alive
     }
 
+      //  acceleration, friction and movement
+      this.acceleration = this.playerStats.speed * 0.02; // Adjust as needed
+      this.friction = 0.8;
+      this.moveSpeed = this.playerStats.speed;
+  
     // Check if specific keys are pressed and update acceleration accordingly
     let accelerationX = 0;
     let accelerationY = 0;

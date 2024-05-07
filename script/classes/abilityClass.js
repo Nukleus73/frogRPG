@@ -1,17 +1,27 @@
+
+
 class Ability {
     constructor(player, ability) {
         switch (ability) {
             case 'Rage':
+                console.log(this.frog_class);
                
             if (player.frog_class === 'warrior') {  // Correct usage
                 const originalStats = { ...player.playerStats };  // Assuming playerStats is stored in player
-                player.playerStats.health *= 8;
-                player.playerStats.mana *= 8;
-                player.playerStats.strength *= 8;
-                player.playerStats.speed *= 8;
+                player.playerStats.health *= 1.5;
+                player.playerStats.mana *= 1.5;
+                player.playerStats.strength *= 1.5;
+                player.playerStats.speed *= 1.5;
+
+               
 
                 console.log("Rage ability activated. Stats increased by 70% for 20 seconds.");
 
+                console.log(player.acceleration);
+
+                console.log(originalStats);
+
+                console.log(player.playerStats);
                 setTimeout(() => {
                     player.playerStats = originalStats;
                     console.log("Rage ability ended. Stats returned to normal.");
