@@ -179,24 +179,34 @@ body {
 }
 
 
-.shake {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-}
-
 @keyframes shake {
+    0%, 100% {
+      transform: translate(0px, 0px);
+    }
     10%, 90% {
-        transform: translate3d(-1px, 0, 0);
+      transform: translate(-1px, 1px);
     }
-    
-    20%, 80% {
-        transform: translate3d(2px, 0, 0);
+    20%, 40%, 60%, 80% {
+      transform: translate(1px, -1px);
     }
+  }
+  
+  .shake-effect {
+    animation: shake 0.9s;
+    animation-iteration-count: infinite;
+  }
 
-    30%, 50%, 70% {
-        transform: translate3d(-4px, 0, 0);
-    }
-
-    40%, 60% {
-        transform: translate3d(4px, 0, 0);
-    }
+  #timer  {
+    display: none;
+    border: 2px solid white;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 7;
+    color: azure;
+    height: 40px;
+    width: auto;
+    padding: 10px;
+    margin: 10px;
 }

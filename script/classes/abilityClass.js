@@ -22,11 +22,54 @@ class Ability {
                 console.log(originalStats);
 
                 console.log(player.playerStats);
+
+                triggerRageEffect();
+
                 setTimeout(() => {
                     player.playerStats = originalStats;
                     console.log("Rage ability ended. Stats returned to normal.");
+                    document.getElementById("timer").style.display = "none";
                 }, 20000);
             }
+
+            function triggerRageEffect() {
+                const gameContainer = document.querySelector('#gameContainer'); // Assuming this is your game's main container
+                gameContainer.classList.add('shake-effect');
+              
+                console.log("Effects ARE WORKING AWGAW");
+              
+                setTimeout(() => {
+                  gameContainer.classList.remove('shake-effect');
+                  console.log("Rage ability ended. Camera shake effect stopped.");
+                }, 20000); // Stop shaking after 20 seconds
+              }
+
+              // Select the timer div from the HTML
+                const timerDiv = document.getElementById('timer');
+                document.getElementById("timer").style.display = "block";
+                
+                // Set the initial time
+                let timeLeft = 20;
+                
+                // Update the display
+                timerDiv.innerText = `${timeLeft} seconds`;
+                
+                // Function to update the countdown
+                function updateCountdown() {
+                    if (timeLeft > 0) {
+                        // Decrease the time left
+                        timeLeft--;
+                        // Update the timer display
+                        timerDiv.innerText = `${timeLeft} seconds`;
+                    } else {
+                        // Stop the countdown
+                        clearInterval(countdownInterval);
+                    }
+                }
+                // Start the countdown to run every second
+                const countdownInterval = setInterval(updateCountdown, 1000);
+                    
+              
                 break;
 
             // Mage Abilities

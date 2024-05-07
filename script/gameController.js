@@ -1,5 +1,8 @@
 // Global player variable
 var player;
+// Global variables to track ability cooldowns
+var abilityCooldown = false;
+var cooldownDuration = 60000; // Cooldown duration in milliseconds (60 seconds)
 
 document.addEventListener('DOMContentLoaded', () => {
     startGame("");
@@ -18,13 +21,17 @@ function startGame(peerId) {
 function setupKeyBindings() {
     document.addEventListener('keydown', (event) => {
         if (event.key === "1") {
-            triggerAbility();
+            if (!abilityCooldown) {
+                triggerAbility();
+                startCooldown(); // Start the cooldown after ability is triggered
+            } else {
+                console.log("Ability is on cooldown. Please wait.");
+            }
         }
     });
 }
 
 function triggerAbility() {
-    
     if (!player) {
         console.log("Player not initialized");
         return;
@@ -45,4 +52,12 @@ function triggerAbility() {
         default:
             console.log("Unknown class");
     }
+}
+
+function startCooldown() {
+    abilityCooldown = true; // Set the cooldown flag
+    setTimeout(() => {
+        abilityCooldown = false; // Reset the cooldown flag after the cooldown duration
+        console.log("Ability ready to use again.");
+    }, cooldownDuration);
 }
