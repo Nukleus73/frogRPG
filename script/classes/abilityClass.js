@@ -2,20 +2,21 @@ class Ability {
     constructor(player, ability) {
         switch (ability) {
             case 'Rage':
-                if (player.frog_class === 'warrior') {  // Correct usage
-                    const originalStats = { ...player.playerStats };  // Assuming playerStats is stored in player
-                    player.playerStats.health *= 8;
-                    player.playerStats.mana *= 8;
-                    player.playerStats.strength *= 8;
-                    player.playerStats.speed *= 8;
+               
+            if (player.frog_class === 'warrior') {  // Correct usage
+                const originalStats = { ...player.playerStats };  // Assuming playerStats is stored in player
+                player.playerStats.health *= 8;
+                player.playerStats.mana *= 8;
+                player.playerStats.strength *= 8;
+                player.playerStats.speed *= 8;
 
-                    console.log("Rage ability activated. Stats increased by 70% for 20 seconds.");
+                console.log("Rage ability activated. Stats increased by 70% for 20 seconds.");
 
-                    setTimeout(() => {
-                        player.playerStats = originalStats;
-                        console.log("Rage ability ended. Stats returned to normal.");
-                    }, 20000);
-                }
+                setTimeout(() => {
+                    player.playerStats = originalStats;
+                    console.log("Rage ability ended. Stats returned to normal.");
+                }, 20000);
+            }
                 break;
 
             // Mage Abilities
@@ -23,7 +24,7 @@ class Ability {
                 // Logic for mage strike ability
                 
 
-                console.log("mageStrike ability activated. Stats increased by 70% for 20 seconds.");
+                console.log("mageStrikeeeeeeeeeee ability activated. Stats increased by 70% for 20 seconds.");
                 break;
   
 
@@ -77,7 +78,7 @@ class Ability {
             
                 // // Start arrow movement loop
                 // this.gameLoop();
-                console.log("Archer strike ability activated. Stats increased by 70% for 20 seconds.");
+                console.log("Archerrrrrrr strike ability activated. Stats increased by 70% for 20 seconds.");
                 break;
             
 

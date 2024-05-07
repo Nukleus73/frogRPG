@@ -24,6 +24,7 @@ function setupKeyBindings() {
 }
 
 function triggerAbility() {
+    
     if (!player) {
         console.log("Player not initialized");
         return;

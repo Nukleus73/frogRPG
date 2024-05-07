@@ -1,13 +1,11 @@
 let playerCounter = 0;
 
-
 // player class definition
-class Player {
+class   Player {
   constructor(frog_class, username, peerId) {
     let playerStats;
     this.frog_class = frog_class;  // Ensure the class type is saved to the instance
     this.playerStats = {};
-
 
     switch (frog_class) {
       case "cleric":
@@ -18,14 +16,14 @@ class Player {
           speed: 100,
         };
         break;
-        case "archer":
-          playerStats = {
-            health: 60,
-            mana: 70,
-            strength: 80,
-            speed: 100,
-          };
-          break;
+      case "archer":
+        playerStats = {
+          health: 60,
+          mana: 70,
+          strength: 80,
+          speed: 100,
+        };
+        break;
       case "mage":
         playerStats = {
           health: 40,
@@ -46,12 +44,10 @@ class Player {
         throw new Error(`[playerClass.js]: Class (${frog_class}) not found.`);
     }
 
+    //  acceleration, friction and movement
     this.acceleration = playerStats.speed * 0.02; // Adjust as needed
     this.friction = 0.8;
     this.moveSpeed = playerStats.speed;
-
-    //  acceleration, friction and movement
-
 
     // initial position
     let map = document.querySelector("#map");
