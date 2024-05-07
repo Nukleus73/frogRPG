@@ -12,6 +12,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 #gameSettings {
@@ -147,7 +148,7 @@ body {
 
 /* Overall styling for the ability menu container */
 .abilityMenu {
-    position: fixed;  /* Makes the menu stick to the bottom of the page */
+    position: absolute;  /* Makes the menu stick to the bottom of the page */
     bottom: 0;        /* Aligns the menu at the bottom */
     width: 100%;      /* Ensures it spans across the width of the screen */
     display: flex;    /* Aligns children divs (abilities) in a row */
@@ -184,10 +185,10 @@ body {
       transform: translate(0px, 0px);
     }
     10%, 90% {
-      transform: translate(-1px, 1px);
+      transform: translate(-2px, 2px);
     }
     20%, 40%, 60%, 80% {
-      transform: translate(1px, -1px);
+      transform: translate(2px, -2px);
     }
   }
   
