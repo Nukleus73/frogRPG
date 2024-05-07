@@ -96,6 +96,7 @@ class   Player {
     this.playerWeapon.style.position = "absolute";
     this.playerWeapon.classList.add("playerWeapon");
 
+    console.log("Rett før weapon");
     // class definitions
     switch (frog_class) {
       case "archer":
@@ -103,9 +104,35 @@ class   Player {
         this.playerWeapon.style.top = "-40%";
         this.playerWeapon.style.left = "-10%";
         this.playerWeapon.style.paddingLeft = "80%";
+        console.log("Inni Weapon Archer");
+        break;
+        
+      case "warrior":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "90%";
+        console.log("Inni Weaponworrior");
+        break;
+
+      case "mage":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "100%";
+        console.log("Inni Weaponworrior");
+        break;
+
+      case "cleric":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "100%";
+        console.log("Inni Weaponworrior");
         break;
     }
-
+    
+    console.log("Etter Weapon");
     // append elements to the document
     this.playerWrapper.appendChild(this.playerBody);
     this.playerWrapper.appendChild(this.playerWeapon);
