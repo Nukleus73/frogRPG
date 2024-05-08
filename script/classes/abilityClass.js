@@ -1,5 +1,4 @@
 
-
 class Ability {
     constructor(player, ability) {
         switch (ability) {
@@ -74,11 +73,11 @@ class Ability {
 
             // Mage Abilities
             case 'mageStrike':
-                // Logic for mage strike ability
+                createMageStrikeEffect();
                 
 
-                console.log("mageStrikeeeeeeeeeee ability activated. Stats increased by 70% for 20 seconds.");
-                break;
+                console.log("mageStrikeeeeeeeeeee ability activated..");
+            break;
   
 
             // Archer Abilities
@@ -146,4 +145,36 @@ class Ability {
                 break;
         }
     }
+}
+
+function createMageStrikeEffect() {
+    console.log("Creating mage attack");
+
+    const player = document.getElementById('player0');  // Assume your player has an ID 'player'
+    if (!player) {
+        console.error('Player element not found.');
+        return;
+    }
+
+    const playerRect = player.getBoundingClientRect();
+    const gameContainer = document.getElementById('gameContainer');
+    const gameRect = gameContainer.getBoundingClientRect();
+
+    const effect = document.createElement('div');
+    effect.className = 'mage-strike-effect';
+    effect.style.position = 'absolute';
+    // Adjust for size in the initial position to avoid using translate
+    effect.style.left = `${playerRect.left - gameRect.left + playerRect.width / 2 - 150}px`; // Half of the width of the effect
+    effect.style.top = `${playerRect.top - gameRect.top + playerRect.height / 2 - 150}px`; // Half of the height of the effect
+    effect.style.width = '300px';
+    effect.style.height = '300px';
+    effect.style.borderRadius = '50%';
+    effect.style.background = 'rgba(0, 0, 255, 0.5)';
+    effect.style.animation = 'pulse-animation 1.5s forwards';
+    effect.style.zIndex = 1000;  // Make sure it's on top of other elements
+
+    gameContainer.appendChild(effect);
+    setTimeout(() => {
+        gameContainer.removeChild(effect);
+    }, 1500); // Remove effect after animation, ensure time matches animation duration
 }
