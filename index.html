@@ -19,6 +19,7 @@
     <script src="./script/classes/abilityClass.js"></script>
     <script src="./script/classes/objectClass.js"></script>
     <script src="./script/classes/playerClass.js"></script>
+    <script src="./script/classes/enemyClass.js"></script>
 </head>
 
 <body>
@@ -64,7 +65,7 @@
     <script>
  document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const characterType = urlParams.get('class');
+    var characterType = urlParams.get('class');
     console.log("Character Type:", characterType); // Check if this logs the expected value
     startGame("", characterType);
 });
