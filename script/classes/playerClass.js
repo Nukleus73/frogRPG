@@ -1,34 +1,29 @@
 let playerCounter = 0;
-
-// Player class definition
-class Player {
+// player class definition
+class   Player {
   constructor(frog_class, username, peerId) {
-    // Check if there's an existing player and remove it
-    const existingPlayer = document.querySelector(".playerWrapper");
-    if (existingPlayer) {
-      existingPlayer.remove();
-    }
-
-    let playerStats;
+    this.frog_class = frog_class;  // Ensure the class type is saved to the instance
+    this.playerStats = {};
 
     switch (frog_class) {
       case "cleric":
-        playerStats = {
+        this.playerStats = {
           health: 100,
           mana: 100,
           strength: 40,
           speed: 100,
         };
-        case "archer":
-          playerStats = {
-            health: 60,
-            mana: 70,
-            strength: 80,
-            speed: 100,
-          };
-          break;
+        break;
+      case "archer":
+        this.playerStats = {
+          health: 60,
+          mana: 70,
+          strength: 80,
+          speed: 100,
+        };
+        break;
       case "mage":
-        playerStats = {
+        this.playerStats = {
           health: 40,
           mana: 70,
           strength: 100,
@@ -36,7 +31,7 @@ class Player {
         };
         break;
       case "warrior":
-        playerStats = {
+        this.playerStats = {
           health: 100,
           mana: 60,
           strength: 80,
@@ -47,12 +42,7 @@ class Player {
         throw new Error(`[playerClass.js]: Class (${frog_class}) not found.`);
     }
 
-    //  acceleration, friction and movement
-    this.acceleration = playerStats.speed * 0.001; // Adjust as needed
-    this.friction = 0.95;
-    this.moveSpeed = playerStats.speed;
-
-    // Initial position
+    // initial position
     let map = document.querySelector("#map");
     let spawn = document.querySelector(".playerSpawnPoint");
     let parentElement = document.querySelector("#gameContainer"); // Assuming parent element's ID is "parentElement"
@@ -93,9 +83,7 @@ class Player {
     //  create the wrapper for the whole player
     this.playerWrapper = document.createElement("div");
     this.playerWrapper.classList.add("playerWrapper");
-
-    // Assign id to the player wrapper
-    this.playerWrapper.id = "player" + playerCounter;
+    this.playerWrapper.setAttribute("id", "player" + playerCounter);
 
     // create the player body
     this.playerBody = document.createElement("img");
@@ -108,6 +96,7 @@ class Player {
     this.playerWeapon.style.position = "absolute";
     this.playerWeapon.classList.add("playerWeapon");
 
+    console.log("Rett før weapon");
     // class definitions
     switch (frog_class) {
       case "archer":
@@ -115,9 +104,35 @@ class Player {
         this.playerWeapon.style.top = "-40%";
         this.playerWeapon.style.left = "-10%";
         this.playerWeapon.style.paddingLeft = "80%";
+        console.log("Inni Weapon Archer");
+        break;
+        
+      case "warrior":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "90%";
+        console.log("Inni Weaponworrior");
+        break;
+
+      case "mage":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "100%";
+        console.log("Inni Weaponworrior");
+        break;
+
+      case "cleric":
+        this.playerWeapon.style.width = "130%";
+        this.playerWeapon.style.top = "-90%";
+        this.playerWeapon.style.left = "0%";
+        this.playerWeapon.style.paddingLeft = "100%";
+        console.log("Inni Weaponworrior");
         break;
     }
-
+    
+    console.log("Etter Weapon");
     // append elements to the document
     this.playerWrapper.appendChild(this.playerBody);
     this.playerWrapper.appendChild(this.playerWeapon);
@@ -150,39 +165,40 @@ class Player {
     playerCounter++;
 
     // start the game loop
-    this.canShoot = true;
     this.gameLoop();
   }
 
-  // Behaviour of object
+
+  
+  // behaviour of object
   gameLoop() {
     if (!this.isAlive()) {
       return; // Stop the game loop if the player is not alive
     }
 
+      //  acceleration, friction and movement
+      this.acceleration = this.playerStats.speed * 0.02; // Adjust as needed
+      this.friction = 0.8;
+      this.moveSpeed = this.playerStats.speed;
+  
     // Check if specific keys are pressed and update acceleration accordingly
     let accelerationX = 0;
     let accelerationY = 0;
     let walls = document.querySelectorAll(".wall")
-    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls, 0)) {
+    if (this.keys[this.keyConfig.up] && !isColliding(this.playerBody, "up", walls)) {
       accelerationY -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls, 0)) {
+    if (this.keys[this.keyConfig.left] && !isColliding(this.playerBody, "left", walls)) {
       accelerationX -= this.acceleration;
     }
-    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls, 0)) {
+    if (this.keys[this.keyConfig.down] && !isColliding(this.playerBody, "down", walls)) {
       accelerationY += this.acceleration;
     }
-    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls, 0)) {
+    if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls)) {
       accelerationX += this.acceleration;
     }
-    if (this.mouse.left && this.canShoot) {
-        let attack = new Ability(this, "archerStrike")  
-        this.canShoot = false;
-        console.log()
-        setTimeout(() => {
-        this.canShoot = true;
-        }, 800);
+    if (this.mouse.left) {
+      let attack = new Ability(this, "archerStrike")
     }
 
     // Normalize the acceleration vector if moving diagonally
@@ -217,9 +233,9 @@ class Player {
     let cursor = document.querySelector("#cursor");
     if (cursor) {
       let playerCenterX =
-        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth + (this.playerWrapper.offsetWidth/4);
+        this.playerWrapper.offsetLeft + this.playerWrapper.offsetWidth / 2;
       let playerCenterY =
-        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight + (this.playerWrapper.offsetHeight/4);
+        this.playerWrapper.offsetTop + this.playerWrapper.offsetHeight / 2;
       let cursorX = cursor.offsetLeft + cursor.offsetWidth / 2;
       let cursorY = cursor.offsetTop + cursor.offsetHeight / 2;
 

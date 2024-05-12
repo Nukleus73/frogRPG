@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FrogRPG</title>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="./script/createMatrix.js"></script>
+    <script src="./script/formatMatrix.js"></script>
+    <script src="./script/tileProperties.js"></script>
+    <script src="./script/isColliding.js"></script>
+    <script src="./script/classes/abilityClass.js"></script>
+    <script src="./script/classes/objectClass.js"></script>
+    <script src="./script/classes/playerClass.js"></script>
+
+
+    <style>
+.mage-strike-effect {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(0, 0, 255, 0.5);
+    animation: pulse-animation 1s forwards;
+    z-index: 1000; 
+}
+
+@keyframes pulse-animation {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+
+    </style>
+
+</head>
+
+<body>
+
+   
+
+    <section id="gameSettings">
+       
+        <input type="text" id="sessionInput" />
+        <a href="" id="gameStartButton"></a>
+    </section>
+    <section id="gameContainer">
+
+
+        <div id="timer">
+            20 seconds
+        </div>
+
+
+        <div id="cursor" draggable="false"></div>
+
+        <div class="healthbar" data-total="1000" data-value="1000">
+            <div class="hbar1">
+                <div class="hbar0">
+                    <div class="hbar">
+                        <div class="hit"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hcircle0">
+            <div class="hcircle1">
+                <svg class="heart" viewBox="-4 -1 38 32" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+          c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+                </svg>
+            </div>
+        </div>
+        <div id="money">
+            <ion-icon name="server"></ion-icon>
+            <p>0</p>
+        </div>
+        <div class="abilityMenu">
+            <div id="ability-1">
+            <div class="abilityText" onclick="">
+               Press "1" for Super Ability    
+            </div>
+            </div>
+        </div>
+    </section>
+    <script src="./script/healthbar.js"></script>
+    <script src="./script/createDungeon.js"></script>
+    <script src="./script/startGame.js"></script>
+    <script src="./script/cursor.js"></script>
+    <script src="./script/gameController.js"></script>
+    <script>
+        </script>
+        
+        <!-- <audio id="bg-music" loop>
+            <source src="assets/music/frog_ingame_music_loop_to_liking.mp3" type="audio/mpeg">
+          </audio>
+          
+          <script>
+            var bgMusic = document.getElementById("bg-music");
+          
+            function toggleMusic() {
+              if (bgMusic.paused) {
+                bgMusic.play();
+              } else {
+                bgMusic.pause();
+              }
+            }
+        </script>
+            <script>
+                window.onload = toggleMusic()
+            </script> -->
+  </body>
+</html>
