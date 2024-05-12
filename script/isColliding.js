@@ -21,7 +21,7 @@ function isColliding(object1, direction, object2) {
             break;
         case "left":
             object1Rect = {
-                x: object1Rect.x - 50,
+                x: object1Rect.x - 40,
                 y: object1Rect.y,
                 width: object1Rect.width,
                 height: object1Rect.height
@@ -29,7 +29,7 @@ function isColliding(object1, direction, object2) {
             break;
         case "right":
             object1Rect = {
-                x: object1Rect.x + 50,
+                x: object1Rect.x + 40,
                 y: object1Rect.y,
                 width: object1Rect.width,
                 height: object1Rect.height

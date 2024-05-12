@@ -100,6 +100,10 @@ function createDungeon(
         if (bitMap.tiles[x][y] == 11) {
           tile.classList.add("wall");
         }
+
+        else if (bitMap.tiles[x][y] == 0) {
+          tile.classList.add("floor");
+        }
   
         //  append the tile to the row
         row.appendChild(tile);
