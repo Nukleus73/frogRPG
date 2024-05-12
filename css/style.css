@@ -20,7 +20,7 @@ body {
 
 #gameContainer {
     background-color: #25131a;
-    aspect-ratio: 1;
+    aspect-ratio: 2;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -65,7 +65,7 @@ body {
     border-collapse: collapse;
     border-radius: 5px;
     width: 100%;
-    scale: 2;
+    scale: 0.5;
     position: relative;
     z-index: 1;
 }
