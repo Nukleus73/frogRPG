@@ -53,6 +53,7 @@ class Enemy {
     checkAlive() {
         return this.isAlive;
     }
+    
 }
 
 // Example usage:
@@ -60,3 +61,5 @@ const enemySpawnX = 500; // Random x position
 const enemySpawnY = 500; // Random y position
 const enemySpawnTime = 3000; // 3 seconds delay for spawning the enemy
 const enemy = new Enemy(enemySpawnX, enemySpawnY, enemySpawnTime);
+
+
