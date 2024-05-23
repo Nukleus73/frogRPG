@@ -3,14 +3,14 @@ var spaceBarPressed = false; // Flag to track if space bar is down
 
 // Function to handle keydown event
 function onKeyDown(event) {
-    if (event.keyCode === 32) { // Check if key pressed is space bar
+    if (event.keyCode === 49) { // Check if key pressed is space bar
         spaceBarPressed = true;
     }
 }
 
 // Function to handle keyup event
 function onKeyUp(event) {
-    if (event.keyCode === 32) { // Check if key released is space bar
+    if (event.keyCode === 49) { // Check if key released is space bar
         spaceBarPressed = false;
     }
 }
@@ -42,10 +42,11 @@ class dungeonObject {
                         break;
                 
                     case "ladder":
-                        if (spaceBarPressed) {
+                       
                             createDungeon({ x: 20, y: 20 }, 12, 3, 5, 0.1);
-                            new Player("archer");
-                        }
+                            new Player(frog);
+                            console.log();
+                        
                         break;
                 }
             }

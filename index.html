@@ -61,7 +61,6 @@
 
         /**/
 
-        
     </style>
 </head>
 <body>
@@ -102,13 +101,6 @@ function toggleMusic() {
     <div class="bannerBackground">
 
         <div class="darkenOverlay"></div>
-
-        <section class="wrap">
-            <div class="assassins">
-            <div class="small">FROG'</div> 
-            <div class="large">RPG</div>
-            </div>
-        </section>
 
         <button class="menuButton" onclick="toggleMusic()">Start Adventure</button>
         <button id="skipText" onclick="nextPage()">Skip</button>
@@ -247,7 +239,7 @@ function toggleMusic() {
                 return;
             }
             const selectedClass = activeCard.getAttribute('data-type');
-            // Redirect to game.html with the selected class as a URL parameter
+            // Redirect to index.html with the selected class as a URL parameter
             window.location.href = `game.html?class=${selectedClass}`;
         });
     });
