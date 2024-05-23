@@ -12,14 +12,9 @@ class Ability {
                 player.playerStats.strength *= 1.5;
                 player.playerStats.speed *= 1.5;
 
-               
-
                 console.log("Rage ability activated. Stats increased by 70% for 20 seconds.");
-
                 console.log(player.acceleration);
-
                 console.log(originalStats);
-
                 console.log(player.playerStats);
 
                 triggerRageEffect();
@@ -66,36 +61,27 @@ class Ability {
                     }
                 }
                 // Start the countdown to run every second
-                const countdownInterval = setInterval(updateCountdown, 1000);
-                    
-              
+                const countdownInterval = setInterval(updateCountdown, 1000);              
                 break;
 
-
-                
             // Mage Abilities
             case 'mageStrike':
                 createMageStrikeEffect();
-                
-
                 console.log("mageStrikeeeeeeeeeee ability activated..");
             break;
 
-        // Archer Abilities
-       // Archer Abilities
-case 'archerStrike':
- //Logic for an archer strike ability.
-    break;
+            // Archer Abilities
+            case 'archerStrike':
+                console.log("archer Strike activated");
+                createArcherShotEffect();
 
-
+            break;
 
             // Cleric Abilities
             case 'clericStrike':
                 // Logic for cleric strike ability
-
-
                 console.log("Cleric strike ability activated. Stats increased by 70% for 20 seconds.");
-                break;
+            break;
         }
     }
 }
@@ -131,3 +117,98 @@ function createMageStrikeEffect() {
         gameContainer.removeChild(effect);
     }, 1500); // Remove effect after animation, ensure time matches animation duration
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupGame();
+  });
+
+  function setupGame() {
+    // Position the player at the center of the game container
+    const player = document.getElementById('player0');
+    const gameContainer = document.getElementById('gameContainer');
+
+    player.style.left = `${gameContainer.offsetWidth / 2 - player.offsetWidth / 2}px`;
+    player.style.top = `${gameContainer.offsetHeight / 2 - player.offsetHeight / 2}px`;
+
+    // Update cursor position on mouse move
+    document.addEventListener('mousemove', (event) => {
+      const cursor = document.getElementById('cursor');
+      cursor.style.left = `${event.clientX}px`;
+      cursor.style.top = `${event.clientY}px`;
+    });
+
+    // Trigger ability when '1' key is pressed
+    document.addEventListener('keydown', function(event) {
+      if (event.key === '1') {
+        createArcherShotEffect();
+      }
+    });
+  }
+
+  function createArcherShotEffect() {
+      console.log("Creating archer shot");
+
+      const player = document.getElementById('player0');
+      const cursor = document.getElementById('cursor');
+      const gameContainer = document.getElementById('gameContainer');
+
+      const playerRect = player.getBoundingClientRect();
+      const gameRect = gameContainer.getBoundingClientRect();
+      const cursorRect = cursor.getBoundingClientRect();
+
+      // Calculate the center positions of the player and cursor
+      const playerCenterX = playerRect.left + playerRect.width / 2;
+      const playerCenterY = playerRect.top + playerRect.height / 2;
+      const cursorCenterX = cursorRect.left + cursorRect.width / 2;
+      const cursorCenterY = cursorRect.top + cursorRect.height / 2;
+
+      console.log("Player center:", playerCenterX, playerCenterY);
+      console.log("Cursor center:", cursorCenterX, cursorCenterY);
+
+      // Calculate the direction vector from player to cursor
+      const directionX = cursorCenterX - playerCenterX;
+      const directionY = cursorCenterY - playerCenterY;
+      const magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
+      const unitDirectionX = directionX / magnitude;
+      const unitDirectionY = directionY / magnitude;
+
+      console.log("Direction vector:", unitDirectionX, unitDirectionY);
+
+      const arrow = document.createElement('img');
+      arrow.src = '../../assets/arrow.png';
+      arrow.className = 'archer-shot-effect';
+      arrow.style.left = `${playerCenterX - gameRect.left - 10}px`;
+      arrow.style.top = `${playerCenterY - gameRect.top - 50}px`;
+      arrow.style.transformOrigin = 'center bottom'; // Rotate from the bottom center
+
+      // Calculate the initial rotation angle
+      const angle = Math.atan2(unitDirectionY, unitDirectionX);
+      arrow.style.transform = `rotate(${angle}rad)`;
+
+      console.log("Arrow created with angle:", angle);
+      gameContainer.appendChild(arrow);
+      console.log("Arrow added to game container");
+
+      // Animate the arrow
+      const speed = 1000; // Speed of the arrow in pixels per second
+      const duration = 1000; // Duration of the animation in milliseconds
+
+      const startTime = performance.now();
+
+      function animateArrow(timestamp) {
+        const elapsed = timestamp - startTime;
+        const progress = elapsed / duration;
+
+        if (progress < 1) {
+          arrow.style.left = `${playerCenterX - gameRect.left + unitDirectionX * speed * progress}px`;
+          arrow.style.top = `${playerCenterY - gameRect.top + unitDirectionY * speed * progress}px`;
+          requestAnimationFrame(animateArrow);
+        } else {
+          gameContainer.removeChild(arrow);
+        }
+      }
+
+      requestAnimationFrame(animateArrow);
+    } 

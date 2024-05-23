@@ -197,9 +197,6 @@ class   Player {
     if (this.keys[this.keyConfig.right] && !isColliding(this.playerBody, "right", walls)) {
       accelerationX += this.acceleration;
     }
-    if (this.mouse.left) {
-      let attack = new Ability(this, "archerStrike")
-    }
 
     // Normalize the acceleration vector if moving diagonally
     if (accelerationX !== 0 && accelerationY !== 0) {

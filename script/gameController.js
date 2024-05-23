@@ -74,14 +74,10 @@ function triggerSpinSwordAbility() {
     const sword = document.querySelector('.playerWeapon');
 
     console.log("Spin Sword Ability Working");
-    
-    // Starter animation
     console.log("Sword element found:", sword);
 
-
-
+    // Starter animation
     sword.classList.add('spin');
-    
     
     // Fjerner animation
     sword.addEventListener('animationend', () => {

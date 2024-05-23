@@ -48,10 +48,10 @@ class dungeonObject {
 
             
             // Log changes in spaceBarPressed
-            if (spaceBarPressed !== prevSpaceBarPressed) {
+            /*if (spaceBarPressed !== prevSpaceBarPressed) {
                 console.log(`Space Bar Pressed: ${spaceBarPressed}`);
                 prevSpaceBarPressed = spaceBarPressed;
-            }
+            }*/
 
             // Log changes in activated
             if (this.activated !== prevActivated) {
@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 10);
 });
-
 
 setTimeout(() => {
     document.querySelectorAll(".treasure").forEach(coin => {
