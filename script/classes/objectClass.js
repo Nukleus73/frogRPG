@@ -21,15 +21,51 @@ document.addEventListener('keyup', onKeyUp);
 
 class dungeonObject {
     constructor(object, type) {
+        console.log(`Initializing dungeonObject for type: ${type}`);
+
         let player = document.querySelector("#player0");
-        let decorObject = object.childNodes[1]
-        let activated = false;
+        if (!player) {
+            console.error("Player element not found");
+            return;
+        }
+
+        let decorObject = object.childNodes[1];
+        if (!decorObject) {
+            console.error("Decor object not found");
+            return;
+        }
+
+        this.activated = false;
+
+        // Initialize previous states for logging changes
+        let prevSpaceBarPressed = spaceBarPressed;
+        let prevActivated = this.activated;
+
+        // Log the creation of a new dungeonObject
+        console.log(`Creating new dungeonObject for type: ${type}`);
+
         this.gameLoop = () => {
+
+            
+            // Log changes in spaceBarPressed
+            if (spaceBarPressed !== prevSpaceBarPressed) {
+                console.log(`Space Bar Pressed: ${spaceBarPressed}`);
+                prevSpaceBarPressed = spaceBarPressed;
+            }
+
+            // Log changes in activated
+            if (this.activated !== prevActivated) {
+                console.log(`Activated: ${this.activated}`);
+                prevActivated = this.activated;
+            }
+
             if (isColliding(player, "up", object) || 
                 isColliding(player, "down", object) ||
                 isColliding(player, "left", object) || 
                 isColliding(player, "right", object)) {
-                activated = true;
+
+                this.activated = true;
+                console.log(`Collision detected with ${type}`);
 
                 switch (type) {
                     case "treasure":
@@ -42,24 +78,43 @@ class dungeonObject {
                         break;
                 
                     case "ladder":
-                       
+                        if (spaceBarPressed) {
+                            console.log("Ladder activated, space bar pressed");
                             createDungeon({ x: 20, y: 20 }, 12, 3, 5, 0.1);
-                            new Player(frog);
-                            console.log();
-                        
+                            new Player("frog");
+                        }
                         break;
                 }
             }
 
             // Request the next animation frame to continue the game loop
-            if (!activated) {
+            if (!this.activated || type === "ladder") {
                 requestAnimationFrame(this.gameLoop);
             }
         };
+
         // Call the gameLoop function to start the game loop
         this.gameLoop();
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM fully loaded and parsed, initializing dungeon objects");
+
+    setTimeout(() => {
+        document.querySelectorAll(".treasure").forEach(coin => {
+            new dungeonObject(coin, "treasure");
+        });
+
+        const ladderElement = document.querySelector(".ladder");
+        if (ladderElement) {
+            new dungeonObject(ladderElement, "ladder");
+        } else {
+            console.error("Ladder element not found");
+        }
+    }, 10);
+});
+
 
 setTimeout(() => {
     document.querySelectorAll(".treasure").forEach(coin => {
