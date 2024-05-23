@@ -29,7 +29,11 @@ function setupKeyBindings() {
             }
         }
         if (event.key === "q") {
-            triggerSpinSwordAbility();
+            if (player.frog_class === 'warrior') {
+                triggerSpinSwordAbility();
+            } else {
+                console.log("SpinSword ability is only available for warriors.");
+            }
         }
     });
 }
