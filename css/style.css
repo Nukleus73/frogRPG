@@ -211,3 +211,20 @@ body {
     padding: 10px;
     margin: 10px;
 }
+
+
+/* Spin animation to keep the handle pointing towards the player */
+@keyframes spin-animation {
+   
+    from {
+        transform: rotate(0deg) translate(20px);
+      }
+      to {
+        transform: rotate(360deg) translate(20px);
+      }
+    
+}
+
+.spin {
+    animation: spin-animation 0.2s linear;
+}

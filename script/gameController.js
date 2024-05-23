@@ -28,6 +28,9 @@ function setupKeyBindings() {
                 console.log("Ability is on cooldown. Please wait.");
             }
         }
+        if (event.key === "q") {
+            triggerSpinSwordAbility();
+        }
     });
 }
 
@@ -61,3 +64,27 @@ function startCooldown() {
         console.log("Ability ready to use again.");
     }, cooldownDuration);
 }
+
+// Function for spin sword
+function triggerSpinSwordAbility() {
+    const sword = document.querySelector('.playerWeapon');
+
+    console.log("Spin Sword Ability Working");
+    
+    // Starter animation
+    console.log("Sword element found:", sword);
+
+
+
+    sword.classList.add('spin');
+    
+    
+    // Fjerner animation
+    sword.addEventListener('animationend', () => {
+        sword.classList.remove('spin');
+    }, { once: true });
+
+
+    console.log("SpinSword ability activated.");
+}
+
